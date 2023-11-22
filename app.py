@@ -162,7 +162,7 @@ def main():
         )
 
     if tool_type == "Vocab review":
-        st.error("Add audio function")
+        st.error("Note to self: Add audio function")
         
         if 'current_vocab_position' not in st.session_state:
             st.session_state.current_vocab_position = 0
