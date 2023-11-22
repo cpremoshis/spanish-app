@@ -4,7 +4,7 @@ from io import BytesIO
 #import speech_recognition as sr
 #from audio_recorder_streamlit import audio_recorder
 import csv
-import configparser
+#import configparser
 import openai
 import os.path
 import re
