@@ -20,10 +20,8 @@ st.set_page_config(
     page_icon="🇪🇸"
     )
 
-#Config file for API key
-config = configparser.RawConfigParser()
-config.read('./config.ini')
-openai.api_key = config['openai']['api_key']
+#API key
+openai.api_key = st.secrets['openai']['api_key']
 
 @st.cache_data
 def open_vocab_list(week_selection):
