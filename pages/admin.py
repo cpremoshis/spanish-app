@@ -49,7 +49,7 @@ with tab1:
             sentences_csv_list.remove("Audio")
             sentences_csv_list = [item.strip(".csv") for item in sentences_csv_list]
             sentence_csv_selected = st.selectbox("Select file:", sentences_csv_list)
-            sentence_csv_to_download = sentences_csv_path + sentence_csv_selected
+            sentence_csv_to_download = sentences_csv_path + sentence_csv_selected + ".csv"
 
             with open(sentence_csv_to_download, 'r') as f:
                 download_button = st.download_button(
