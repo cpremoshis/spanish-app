@@ -43,20 +43,23 @@ with tab1:
                     )
                 
         if type_selection == "Sentences":
-            sentences_files_path = "/mount/src/spanish-app/Sentences/"
-            sentences_files_list = os.listdir(sentences_files_path)
-            sentences_files_list.remove(".DS_Store")
-            sentences_files_list.remove("Audio")
-            sentence_file_selected = st.selectbox("Select file:", sentences_files_list)
-            sentence_file_to_download = sentences_files_path + sentence_file_selected
+            sentences_csv_path = "/mount/src/spanish-app/Sentences/"
+            sentences_csv_list = os.listdir(sentences_csv_path)
+            sentences_csv_list.remove(".DS_Store")
+            sentences_csv_list.remove("Audio")
+            sentences_csv_list = [item.strip(".csv") for item in sentences_csv_list]
+            sentence_csv_selected = st.selectbox("Select file:", sentences_csv_list)
+            sentence_csv_to_download = sentences_csv_path + sentence_csv_selected
 
-            with open(sentence_file_to_download, 'r') as f:
+            with open(sentence_csv_to_download, 'r') as f:
                 download_button = st.download_button(
-                    label = "Download file",
+                    label = "Download CSV",
                     data = f,
-                    file_name = sentence_file_selected,
+                    file_name = sentence_csv_selected,
                     mime = 'text/csv'
                 )
+
+            with open()
         
 with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
@@ -69,9 +72,8 @@ with tab2:
             file_name = "reports.txt",
             mime = 'text/plain'
         )
-    for line in reports:
-        st.write(line)
-    #st.write(reports)
+
+    st.write(reports)
 
 
 
