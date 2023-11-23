@@ -30,7 +30,6 @@ with tab1:
         if type_selection == "Vocab":
             vocab_files_path = "/mount/src/spanish-app/Vocab/"
             vocab_files_list = os.listdir(vocab_files_path)
-            vocab_files_path.remove(".DS_Store")
             selected_file = st.selectbox("Select file:", vocab_files_list)
             file_to_download = vocab_files_path + selected_file
 
