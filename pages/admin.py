@@ -62,7 +62,7 @@ with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
 
     with open(feedback_file, 'r') as f:
-        reports = f.read().replace("\\n", "\n")
+        reports = f.read()
     
     st.write(reports)
 
