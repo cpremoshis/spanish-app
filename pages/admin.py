@@ -26,11 +26,13 @@ with tab1:
             #FINISH INSTRUCTIONS HERE
 
     if action_selection == "Download":
-        #dir_list = os.listdir("./Vocab")
-        #st.write(dir_list)
+        dir_list = os.listdir("/mount/src/spanish-app")
+        st.write(dir_list)
 
-        cwd = os.getcwd()
-        st.write(cwd)
+        #Show current working directory - /mount/src/spanish-app
+        #cwd = os.getcwd()
+        #st.write(cwd)
 
-        directory = os.path.dirname(os.path.abspath(__file__))
-        st.write(directory)
+        #Show full directory for script location - /mount/src/spanish-app/pages
+        #directory = os.path.dirname(os.path.abspath(__file__))
+        #st.write(directory)
