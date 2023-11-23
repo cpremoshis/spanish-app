@@ -33,12 +33,13 @@ with tab1:
             selected_file = st.selectbox("Select file:", vocab_files_list)
             file_to_download = vocab_files_path + selected_file
 
-            download_button = st.download_button(
-                label = "Download file",
-                data = file_to_download,
-                file_name = selected_file,
-                mime = 'text/csv'
-                )
+            with open(file_to_download, 'r') as f:
+                download_button = st.download_button(
+                    label = "Download file",
+                    data = file_to_download,
+                    file_name = selected_file,
+                    mime = 'text/csv'
+                    )
         
         #Show files in specified directory
         #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
