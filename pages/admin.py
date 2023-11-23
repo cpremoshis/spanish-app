@@ -64,7 +64,8 @@ with tab2:
     with open(feedback_file, 'r') as f:
         reports = f.read()
     
-    st.text(reports)
+    for line in reports:
+        st.write(line)
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
