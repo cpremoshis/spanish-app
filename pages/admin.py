@@ -66,6 +66,11 @@ with tab2:
     
     st.write(reports)
 
+    #Show files in specified directory
+    dir_list = os.listdir("/mount/src/spanish-app/Feedback")
+    st.write(dir_list)
+
+
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
 #st.write(dir_list)
