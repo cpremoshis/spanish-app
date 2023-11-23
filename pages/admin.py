@@ -59,7 +59,7 @@ with tab1:
                     mime = 'text/csv'
                 )
 
-            with open()
+            #with open()
         
 with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
