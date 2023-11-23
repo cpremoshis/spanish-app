@@ -31,3 +31,6 @@ with tab1:
 
         cwd = os.getcwd()
         st.write(cwd)
+
+        directory = os.path.dirname(os.path.abspath(__file__))
+        st.write(directory)
