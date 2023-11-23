@@ -69,7 +69,9 @@ with tab2:
             file_name = "reports.txt",
             mime = 'text/plain'
         )
-    st.write(reports)
+    for line in reports:
+        st.write(line)
+    #st.write(reports)
 
 
 
