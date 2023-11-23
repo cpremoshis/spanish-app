@@ -26,7 +26,7 @@ with tab1:
             #FINISH INSTRUCTIONS HERE
 
     if action_selection == "Download":
-        dir_list = os.listdir("/mount/src/spanish-app")
+        dir_list = os.listdir("/mount/src/spanish-app/Feedback")
         st.write(dir_list)
 
         #Show current working directory - /mount/src/spanish-app
