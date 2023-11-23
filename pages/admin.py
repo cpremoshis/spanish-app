@@ -36,7 +36,7 @@ with tab1:
             with open(file_to_download, 'r') as f:
                 download_button = st.download_button(
                     label = "Download file",
-                    data = file_to_download,
+                    data = f,
                     file_name = selected_file,
                     mime = 'text/csv'
                     )
