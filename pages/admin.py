@@ -36,6 +36,7 @@ with tab1:
             download_button = st.download_button(
                 label = "Download file",
                 data = file_to_download,
+                file_name = selected_file,
                 mime = 'text/csv'
                 )
         
