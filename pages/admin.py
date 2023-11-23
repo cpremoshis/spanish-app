@@ -58,14 +58,22 @@ with tab1:
                     mime = 'text/csv'
                 )
         
-        #Show files in specified directory
-        #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
-        #st.write(dir_list)
+with tab2:
+    feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
 
-        #Show current working directory - /mount/src/spanish-app
-        #cwd = os.getcwd()
-        #st.write(cwd)
+    with open(feedback_file, 'r') as f:
+        reports = f.read()
+    
+    st.write(reports)
 
-        #Show full directory for script - /mount/src/spanish-app/pages
-        #directory = os.path.dirname(os.path.abspath(__file__))
-        #st.write(directory)
+#Show files in specified directory
+#dir_list = os.listdir("/mount/src/spanish-app/Feedback")
+#st.write(dir_list)
+
+#Show current working directory - /mount/src/spanish-app
+#cwd = os.getcwd()
+#st.write(cwd)
+
+#Show full directory for script - /mount/src/spanish-app/pages
+#directory = os.path.dirname(os.path.abspath(__file__))
+#st.write(directory)
