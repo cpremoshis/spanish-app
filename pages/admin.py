@@ -63,12 +63,14 @@ with tab2:
 
     with open(feedback_file, 'r') as f:
         reports = f.read().replace("\\n", "\n")
-    
+        download_button = st.download_button(
+            label = "Download file",
+            data = f,
+            file_name = "reports.txt",
+            mime = 'text/plain'
+        )
     st.write(reports)
 
-    #Show files in specified directory
-    dir_list = os.listdir("/mount/src/spanish-app/Feedback")
-    st.write(dir_list)
 
 
 #Show files in specified directory
