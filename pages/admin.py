@@ -31,16 +31,30 @@ with tab1:
             vocab_files_path = "/mount/src/spanish-app/Vocab/"
             vocab_files_list = os.listdir(vocab_files_path)
             vocab_files_list.remove(".DS_Store")
-            selected_file = st.selectbox("Select file:", vocab_files_list)
-            file_to_download = vocab_files_path + selected_file
+            vocab_file_selected = st.selectbox("Select file:", vocab_files_list)
+            vocab_file_to_download = vocab_files_path + vocab_file_selected
 
-            with open(file_to_download, 'r') as f:
+            with open(vocab_file_to_download, 'r') as f:
                 download_button = st.download_button(
                     label = "Download file",
                     data = f,
-                    file_name = selected_file,
+                    file_name = vocab_file_selected,
                     mime = 'text/csv'
                     )
+                
+        if type_selection == "Sentences":
+            sentences_files_path = "/mount/src/spanish-app/Sentences"
+            sentences_files_list = os.listdir(sentences_files_path)
+            sentence_file_selected = st.selectbox("Select file:", sentences_files_list)
+            sentence_file_to_download = sentences_files_path + sentence_file_selected
+
+            with open(sentence_file_to_download, 'r') as f:
+                download_button = st.download_button(
+                    label = "Download file",
+                    data = f,
+                    file_name = sentence_file_selected,
+                    mime = 'text/csv'
+                )
         
         #Show files in specified directory
         #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
