@@ -26,5 +26,8 @@ with tab1:
             #FINISH INSTRUCTIONS HERE
 
     if action_selection == "Download":
-        dir_list = os.listdir("./Vocab")
-        st.write(dir_list)
+        #dir_list = os.listdir("./Vocab")
+        #st.write(dir_list)
+
+        cwd = os.getcwd()
+        st.write(cwd)
