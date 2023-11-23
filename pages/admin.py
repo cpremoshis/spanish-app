@@ -45,7 +45,7 @@ with tab1:
         if type_selection == "Sentences":
             sentences_files_path = "/mount/src/spanish-app/Sentences/"
             sentences_files_list = os.listdir(sentences_files_path)
-            sentences_files_list.remove(".DS_Store")
+            sentences_files_list.remove(".DS_Store", "Audio")
             sentence_file_selected = st.selectbox("Select file:", sentences_files_list)
             sentence_file_to_download = sentences_files_path + sentence_file_selected
 
