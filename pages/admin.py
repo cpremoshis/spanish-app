@@ -26,13 +26,27 @@ with tab1:
             #FINISH INSTRUCTIONS HERE
 
     if action_selection == "Download":
-        dir_list = os.listdir("/mount/src/spanish-app/Feedback")
-        st.write(dir_list)
+        
+        if type_selection == "Vocab":
+            vocab_files_path = "/mount/src/spanish-app/Vocab"
+            vocab_files_list = os.listdir(vocab_files_path)
+            selected_file = st.selectbox("Select file:", vocab_files_list)
+            file_to_download = vocab_files_path + selected_file
+
+            download_button = st.download_button(
+                label = "Download file",
+                data = file_to_download,
+                mime = 'text/csv'
+                )
+        
+        #Show files in specified directory
+        #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
+        #st.write(dir_list)
 
         #Show current working directory - /mount/src/spanish-app
         #cwd = os.getcwd()
         #st.write(cwd)
 
-        #Show full directory for script location - /mount/src/spanish-app/pages
+        #Show full directory for script - /mount/src/spanish-app/pages
         #directory = os.path.dirname(os.path.abspath(__file__))
         #st.write(directory)
