@@ -62,10 +62,10 @@ with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
 
     with open(feedback_file, 'r') as f:
-        reports = f.read().replace("\\n", "\n")
+        reports = f.read()
         download_button = st.download_button(
             label = "Download file",
-            data = f,
+            data = reports,
             file_name = "reports.txt",
             mime = 'text/plain'
         )
