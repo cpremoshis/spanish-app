@@ -111,9 +111,9 @@ with tab3:
     sentences_path = '/mount/src/spanish-app/Sentences/'
     audio_path = '/mount/src/spanish-app/Audio/'
 
-    sentences_tree = sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
+    sentences_tree = sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store')
 
-    audio_tree = sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
+    audio_tree = sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store')
 
     sentences_tree
     audio_tree
