@@ -35,6 +35,10 @@ with tab1:
             st.write(file_df.head())
             #FINISH INSTRUCTIONS HERE
 
+        audio_files = os.listdir('/mount/src/spanish-app/Sentences/Audio/')
+        st.write(audio_files)
+
+
     if action_selection == "Download":
         
         if type_selection == "Vocab":
@@ -88,7 +92,7 @@ with tab1:
 
                         buttons.empty()
 
-                        with open(zipped_file, 'rb') as f2:
+                        with open(zipped_file, 'r') as f2:
                             download_button = st.download_button(
                                 label = "Download audio",
                                 data = f2,
