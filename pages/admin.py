@@ -15,7 +15,7 @@ st.set_page_config(
 def upload():
     tbd
 
-tab1, tab2, tab3 = st.tabs(['Upload/Download Files', 'Feedback', 'File list'])
+tab1, tab2, tab3, tab4 = st.tabs(['Upload/Download Files', 'Generate content', 'Feedback', 'File list'])
 
 with tab1:
     type_selection = st.selectbox("File type:", ['Vocab', 'Sentences'])
@@ -94,6 +94,9 @@ with tab1:
                         st.markdown(href, unsafe_allow_html=True)
         
 with tab2:
+    st.error("Under construction.")
+
+with tab3:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
 
     with open(feedback_file, 'r') as f:
@@ -107,7 +110,7 @@ with tab2:
 
     st.write(reports)
 
-with tab3:
+with tab4:
     st.error("Under construction.")
 
 #Show files in specified directory
