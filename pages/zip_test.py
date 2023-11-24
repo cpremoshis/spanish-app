@@ -27,9 +27,7 @@ if st.button("Generate zip file"):
 
 with open('/mount/src/spanish-app/audio_files.zip', 'rb') as f:
     download_button = st.button(
-        label = "Download zip",
-        mime = 'application/zip'
-    )
+        label = "Download zip")
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/Week 9")
