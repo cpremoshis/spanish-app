@@ -88,7 +88,7 @@ with tab1:
 
                         buttons.empty()
 
-                        with open(zipped_file, 'r') as f2:
+                        with open(zipped_file, 'rb') as f2:
                             download_button = st.download_button(
                                 label = "Download audio",
                                 data = f2,
