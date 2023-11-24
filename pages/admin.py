@@ -15,9 +15,9 @@ st.set_page_config(
 def upload():
     tbd
 
-login_container = st.container()
+login_container = st.empty()
 
-with login_container:
+with login_container.container():
     login_user = st.text_input("Username:")
     login_pass = st.text_input("Password:")
     login_button = st.button("Log in")
