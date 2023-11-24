@@ -18,8 +18,7 @@ def zip_audio(path, files_list):
 
     with ZipFile(zipped_path, 'w') as zip_object:
         for item in files_list:
-            with open(item, 'rb') as file_to_zip:
-                zip_object.write(file_to_zip)
+            zip_object.write(path + item, item)
 
     return zipped_path
 
@@ -88,15 +87,12 @@ with tab1:
 
                     if generate_audio_button:
                         audio_files = os.listdir(sentence_audio_to_download)
-                        audio_files = [(sentence_audio_to_download + item) for item in audio_files]
-
-                        st.write(audio_files)
 
                         zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
                         buttons.empty()
 
-                        with open(zipped_file, 'rb') as f2:
+                        with open(zipped_file, 'r') as f2:
                             download_button = st.download_button(
                                 label = "Download audio",
                                 data = f2,
