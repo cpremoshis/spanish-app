@@ -88,9 +88,9 @@ with tab1:
                     if generate_audio_button:
                         audio_files = os.listdir(sentence_audio_to_download)
 
-                        zipped_file = zip_audio(sentence_audio_to_download, audio_files)
-
                         st.write(audio_files)
+
+                        zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
                         buttons.empty()
 
