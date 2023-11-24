@@ -111,9 +111,9 @@ with tab3:
     sentences_path = '/mount/src/spanish-app/Sentences/'
     audio_path = '/mount/src/spanish-app/Audio/'
 
-    sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
+    st.write(sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
 
-    sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
+    st.write(sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
