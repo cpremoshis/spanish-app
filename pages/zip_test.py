@@ -28,7 +28,6 @@ if st.button("Generate zip file"):
 with open('/mount/src/spanish-app/audio_files.zip', 'rb') as f:
     download_button = st.button(
         label = "Download zip",
-        file_name = zip_filename,
         mime = 'application/zip'
     )
 
