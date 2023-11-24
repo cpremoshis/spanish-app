@@ -26,5 +26,5 @@ if st.button("Generate zip file"):
     zip_folder(folder_path, zip_filename)
 
 #Show files in specified directory
-dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/")
+dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/Week 9")
 st.write(dir_list)
