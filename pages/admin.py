@@ -13,15 +13,6 @@ st.set_page_config(
 def upload():
     tbd
 
-def zip_audio(path, files_list):
-    zipped_path = path + "audio_files.zip"
-
-    with ZipFile(zipped_path, 'w') as zip_object:
-        for item in files_list:
-            zip_object.write(path + item, item)
-
-    return zipped_path
-
 tab1, tab2 = st.tabs(['Upload/Download Files', 'Feedback'])
 
 with tab1:
@@ -85,10 +76,17 @@ with tab1:
                 with buttons:
                     generate_audio_button = st.button("Generate audio")
 
+                    def zip_audio(files_list):
+                        zipped_path = sentence_audio_path + "audio_files.zip"
+
+                        with ZipFile(zipped_path, 'w') as zip_object:
+                            for item in files_list:
+                                zip_object.write(sentence_audio_path + item, item)
+
+                        return zipped_path
+
                     if generate_audio_button:
                         audio_files = os.listdir(sentence_audio_to_download)
-
-                        st.write(audio_files)
 
                         zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
