@@ -4,6 +4,7 @@ from io import StringIO
 import pandas as pd
 import os
 from zipfile import ZipFile
+import base64
 
 #Page configuration
 st.set_page_config(
@@ -56,9 +57,6 @@ with tab1:
             week_selected = st.selectbox("Select file:", sentences_csv_list)
             sentence_csv_to_download = sentences_csv_path + week_selected + "_final.csv"
 
-            sentence_audio_path = "/mount/src/spanish-app/Sentences/Audio/"
-            sentence_audio_to_download = sentence_audio_path + week_selected + "/"
-
             download_csv_col, download_audio_col = st.columns(2)
 
             with download_csv_col:
@@ -71,26 +69,33 @@ with tab1:
                     )
 
             with download_audio_col:
-                buttons = st.empty()
+                if st.button("Download audio"):
 
-                with buttons:
-                    generate_audio_button = st.button("Generate audio")
+                    def zip_folder(folder_path, zip_filename):
+                        if not os.path.exists(folder_path):
+                            print(f"Error: Folder '{folder_path}' not found.")
+                            return
+                        
+                        with ZipFile(zip_filename, 'w') as zip_file:
+                            for foldername, subfolders, filenames in os.walk(folder_path):
+                                for filename in filenames:
+                                    file_path = os.path.join(foldername, filename)
+                                    zip_file.write(file_path, os.path.relpath(file_path, folder_path))
 
-                    if generate_audio_button:
-                        audio_files = os.listdir(sentence_audio_to_download)
-                        audio_files = [(sentence_audio_to_download + item) for item in audio_files]
+                        print(f"Zip file '{zip_filename}' created successfully.")
 
-                        zipped_file = zip_audio(audio_files)
+                    folder_path = "/mount/src/spanish-app/Sentences/Audio/" + week_selected + "/"
+                    zip_filename = "/mount/src/spanish-app/Sentences/Audio/audio_files.zip"
 
-                        buttons.empty()
+                    if st.button("Generate zip file"):
+                        zip_folder(folder_path, zip_filename)
 
-                        with open(zipped_file, 'r') as f2:
-                            download_button = st.download_button(
-                                label = "Download audio",
-                                data = f2,
-                                file_name = week_selected,
-                                mime = 'file/zip'
-                            )
+                    if os.path.exists(zip_filename):
+                        with open(zip_filename, 'rb') as f:
+                            zip_contents = f.read()
+                            b64 = base64.b64encode(zip_contents).decode()
+                            href = f'<a href="data:file/zip;base64,{b64}" download="{zip_filename}">Download zip</a>'
+                            st.markdown(href, unsafe_allow_html=True)
         
 with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"

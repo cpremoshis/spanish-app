@@ -17,7 +17,7 @@ def zip_folder(folder_path, zip_filename):
     print(f"Zip file '{zip_filename}' created successfully.")
 
 folder_path = "/mount/src/spanish-app/Sentences/Audio/"
-zip_filename = "audio_files.zip"
+zip_filename = "/mount/src/spanish-app/Sentences/Audio/audio_files.zip"
 
 #Show files in specified directory
 dir_list = os.listdir("/mount/src/spanish-app/")
