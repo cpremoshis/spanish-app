@@ -89,6 +89,8 @@ with tab1:
                         audio_files = os.listdir(sentence_audio_to_download)
                         audio_files = [(sentence_audio_to_download + item) for item in audio_files]
 
+                        st.write(audio_files)
+
                         zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
                         buttons.empty()
