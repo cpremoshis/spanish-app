@@ -11,7 +11,7 @@ def zip_folder(folder_path, zip_filename):
         for foldername, subfolders, filenames in os.walk(folder_path):
             for filename in filenames:
                 file_path = os.path.join(foldername, filename)
-                zip_file.write(file_path, os.relpath(file_path, folder_path))
+                zip_file.write(file_path, os.path.relpath(file_path, folder_path))
 
     print(f"Zip file '{zip_filename}' created successfully.")
 
