@@ -20,7 +20,7 @@ folder_path = "/mount/src/spanish-app/Sentences/Audio/"
 zip_filename = "/mount/src/spanish-app/Sentences/Audio/audio_files.zip"
 
 #Show files in specified directory
-dir_list = os.listdir("/mount/src/spanish-app/Sentences/")
+dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/")
 st.write(dir_list)
 
 if st.button("Generate zip file"):
