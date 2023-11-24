@@ -1,17 +1,10 @@
 import streamlit as st
 import os
-from zipfile import ZipFile
-import base64
+import seedir as sd
 
 #Show files in specified directory
-dir_list = os.listdir("/mount/src/spanish-app/")
-st.write(dir_list)
+sentences_path = '/mount/src/spanish-app/Sentences/'
 
-sentences_start_path = '/mount/src/spanish-app/Sentences/'
-
-for root, dirs, files in os.walk(sentences_start_path):
-	level = root.replace(sentences_start_path, '').count(os.sep)
-	indent = ' ' * 4 * (level)
-	st.write('{}{}/'.format(indent, os.path.basename(root)))
+sd.seedir(path=sentences_path, style='lines', itemlimit=10, depthlimit=2, exclude_folders='.git')
 
 #os.remove('/mount/src/spanish-app/Sentences/Audio/audio_files.zip')
