@@ -49,7 +49,7 @@ with tab1:
             sentences_csv_list.remove("Audio")
             sentences_csv_list = [item.strip(".csv") for item in sentences_csv_list]
             week_selected = st.selectbox("Select file:", sentences_csv_list)
-            sentence_csv_to_download = sentences_csv_path + week_selected + "_final.csv"
+            sentence_csv_to_download = sentences_csv_path + week_selected + ".csv"
 
             sentence_audio_path = "/mount/src/spanish-app/Sentences/Audio/"
             sentence_audio_to_download = sentence_audio_path + week_selected
