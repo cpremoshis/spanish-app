@@ -93,7 +93,7 @@ with tab1:
                     with open(zip_filename, 'rb') as f:
                         zip_contents = f.read()
                         b64 = base64.b64encode(zip_contents).decode()
-                        href = f'<a href="data:file/zip;base64,{b64}" download="{zip_filename}">Download zip</a>'
+                        href = f'<a href="data:file/zip;base64,{b64}" download="{week_selected}">Download zip</a>'
                         st.markdown(href, unsafe_allow_html=True)
         
 with tab2:
