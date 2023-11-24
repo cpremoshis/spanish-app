@@ -111,9 +111,12 @@ with tab3:
     sentences_path = '/mount/src/spanish-app/Sentences/'
     audio_path = '/mount/src/spanish-app/Audio/'
 
-    st.write(sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
+    sentences_tree = sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
 
-    st.write(sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
+    audio_tree = sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.DS_Store'))
+
+    sentences_tree
+    audio_tree
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
