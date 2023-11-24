@@ -108,7 +108,7 @@ with tab2:
     st.write(reports)
 
 with tab3:
-    sentences_path = '/mount/src/spanish-app/Sentences/'
+    sentences_path = '/mount/src/spanish-app/'
 
     sd.seedir(path=sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
 
