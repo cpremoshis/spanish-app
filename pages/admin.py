@@ -35,7 +35,7 @@ with tab1:
             st.write(file_df.head())
             #FINISH INSTRUCTIONS HERE
 
-        audio_files = os.listdir('/mount/src/spanish-app/Sentences/Audio/')
+        audio_files = os.listdir('/mount/src/spanish-app/Sentences/Audio/Week 9/')
         st.write(audio_files)
 
 
