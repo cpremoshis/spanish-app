@@ -108,9 +108,12 @@ with tab2:
     st.write(reports)
 
 with tab3:
-    sentences_path = '/mount/src/spanish-app/'
+    sentences_path = '/mount/src/spanish-app/Sentences/'
+    audio_path = '/mount/src/spanish-app/Audio/'
 
-    sd.seedir(path=sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
+    sd.seedir(sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
+
+    sd.seedir(audio_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
