@@ -19,12 +19,12 @@ folder_path = "/mount/src/spanish-app/Sentences/Audio/"
 zip_filename = "audio_files.zip"
 
 #Show files in specified directory
-dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/")
+dir_list = os.listdir("/mount/src/spanish-app/")
 st.write(dir_list)
 
 if st.button("Generate zip file"):
     zip_folder(folder_path, zip_filename)
 
 #Show files in specified directory
-dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/Week 9")
-st.write(dir_list)
+#dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/Week 9")
+#st.write(dir_list)
