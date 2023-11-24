@@ -25,7 +25,7 @@ st.write(dir_list)
 if st.button("Generate zip file"):
     zip_folder(folder_path, zip_filename)
 
-with open('/mount/src/spanish-app/audio_files.zip', 'r') as f:
+with open('/mount/src/spanish-app/audio_files.zip', 'rb') as f:
     download_button = st.button(
         label = "Download zip",
         data = f,
