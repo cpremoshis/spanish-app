@@ -79,12 +79,12 @@ with tab1:
                 buttons = st.empty()
 
                 with buttons:
-                    generate_audio = st.button("Generate audio")
+                    generate_audio_button = st.button("Generate audio")
 
-                    if generate_audio:
+                    if generate_audio_button:
                         audio_files = os.listdir(sentence_audio_to_download)
 
-                        zipped_file = generate_audio(sentence_audio_to_download, audio_files)
+                        zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
                         buttons.empty()
 
