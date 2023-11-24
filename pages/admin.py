@@ -5,6 +5,7 @@ import pandas as pd
 import os
 from zipfile import ZipFile
 import base64
+import seedir as sd
 
 #Page configuration
 st.set_page_config(
@@ -14,7 +15,7 @@ st.set_page_config(
 def upload():
     tbd
 
-tab1, tab2 = st.tabs(['Upload/Download Files', 'Feedback'])
+tab1, tab2, tab3 = st.tabs(['Upload/Download Files', 'Feedback', 'File list'])
 
 with tab1:
     type_selection = st.selectbox("File type:", ['Vocab', 'Sentences'])
@@ -106,7 +107,10 @@ with tab2:
 
     st.write(reports)
 
+with tab3:
+    sentences_path = '/mount/src/spanish-app/Sentences/'
 
+    sd.seedir(path=sentences_path, style='lines', itemlimit=10, depthlimit=3, exclude_folders='.git')
 
 #Show files in specified directory
 #dir_list = os.listdir("/mount/src/spanish-app/Feedback")
