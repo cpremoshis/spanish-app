@@ -76,15 +76,6 @@ with tab1:
                 with buttons:
                     generate_audio_button = st.button("Generate audio")
 
-                    def zip_audio(files_list):
-                        zipped_path = sentence_audio_path + "audio_files.zip"
-
-                        with ZipFile(zipped_path, 'w') as zip_object:
-                            for item in files_list:
-                                zip_object.write(item, item)
-
-                        return zipped_path
-
                     if generate_audio_button:
                         audio_files = os.listdir(sentence_audio_to_download)
                         audio_files = [(sentence_audio_to_download + item) for item in audio_files]
