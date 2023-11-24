@@ -52,7 +52,7 @@ with tab1:
             sentence_csv_to_download = sentences_csv_path + week_selected + "_final.csv"
 
             sentence_audio_path = "/mount/src/spanish-app/Sentences/Audio/"
-            sentence_audio_to_download = sentence_audio_path + week_selected
+            sentence_audio_to_download = sentence_audio_path + week_selected + "/"
 
             download_csv_col, download_audio_csv = st.columns(2)
 
