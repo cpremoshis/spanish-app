@@ -3,6 +3,7 @@ import csv
 from io import StringIO
 import pandas as pd
 import os
+from zipfile import ZipFile
 
 #Page configuration
 st.set_page_config(
@@ -11,6 +12,15 @@ st.set_page_config(
 
 def upload():
     tbd
+
+def zip_audio(path, files_list):
+    zipped_path = path + "audio_files.zip"
+
+    with ZipFile(zipped_path, 'w') as zip_object:
+        for item in files_list:
+            zip_object.write(item)
+
+    return zipped_path
 
 tab1, tab2 = st.tabs(['Upload/Download Files', 'Feedback'])
 
@@ -54,7 +64,7 @@ with tab1:
             sentence_audio_path = "/mount/src/spanish-app/Sentences/Audio/"
             sentence_audio_to_download = sentence_audio_path + week_selected + "/"
 
-            download_csv_col, download_audio_csv = st.columns(2)
+            download_csv_col, download_audio_col = st.columns(2)
 
             with download_csv_col:
                 with open(sentence_csv_to_download, 'r') as f:
@@ -65,13 +75,26 @@ with tab1:
                         mime = 'text/csv'
                     )
 
-            with download_audio_csv:
-                with open(sentence_audio_to_download, 'r') as f2:
-                    download_button = st.download_button(
-                        label = "Download audio",
-                        data = f2,
-                        file_name = week_selected
-                    )
+            with download_audio_col:
+                buttons = st.empty()
+
+                with buttons:
+                    generate_audio = st.button("Generate audio")
+
+                    if generate_audio:
+                        audio_files = os.listdir(sentence_audio_to_download)
+
+                        zipped_file = generate_audio(sentence_audio_to_download, audio_files)
+
+                        buttons.empty()
+
+                        with open(zipped_file, 'r') as f2:
+                            download_button = st.download_button(
+                                label = "Download audio",
+                                data = f2,
+                                file_name = week_selected,
+                                mime = 'file/zip'
+                            )
         
 with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
