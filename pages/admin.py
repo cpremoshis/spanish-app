@@ -90,6 +90,8 @@ with tab1:
 
                         zipped_file = zip_audio(sentence_audio_to_download, audio_files)
 
+                        st.write(audio_files)
+
                         buttons.empty()
 
                         with open(zipped_file, 'r') as f2:
