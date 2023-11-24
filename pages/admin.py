@@ -81,7 +81,7 @@ with tab1:
 
                         with ZipFile(zipped_path, 'w') as zip_object:
                             for item in files_list:
-                                zip_object.write(sentence_audio_path + item, item)
+                                zip_object.write(item, item)
 
                         return zipped_path
 
