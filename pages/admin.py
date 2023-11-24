@@ -84,7 +84,7 @@ with tab1:
                     print(f"Zip file '{zip_filename}' created successfully.")
 
                 folder_path = "/mount/src/spanish-app/Sentences/Audio/" + week_selected + "/"
-                zip_filename = "/mount/src/spanish-app/Sentences/Audio/audio_files.zip"
+                zip_filename = "/mount/src/spanish-app/Sentences/Audio/" + week_selected + "/" + "audio_files.zip"
 
                 if st.button("Generate zip file"):
                     zip_folder(folder_path, zip_filename)
