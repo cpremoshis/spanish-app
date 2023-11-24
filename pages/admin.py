@@ -18,7 +18,8 @@ def zip_audio(path, files_list):
 
     with ZipFile(zipped_path, 'w') as zip_object:
         for item in files_list:
-            zip_object.write(item)
+            with open(item, 'rb') as file_to_zip:
+                zip_object.write(file_to_zip, os.path.basename(item))
 
     return zipped_path
 
