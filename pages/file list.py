@@ -23,10 +23,10 @@ def print_directory_contents(path):
 
         print("")
 
-sentences_path = "/mount/src/spanish-app/Sentences"
-audio_path = "/mount/src/spanish-app/Audio"
+sentences_path = "/mount/src/spanish-app/Sentences/"
+audio_path = "/mount/src/spanish-app/Audio/"
 
 st.write(print_directory_contents(sentences_path))
-st.write(print_directory_contents(vocab_path))
+st.write(print_directory_contents(audio_path))
 
 #os.remove('/mount/src/spanish-app/Sentences/Audio/audio_files.zip')
