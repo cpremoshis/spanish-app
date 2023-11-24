@@ -26,7 +26,7 @@ if st.button("Generate zip file"):
     zip_folder(folder_path, zip_filename)
 
 if os.path.exists(zip_filename):
-    with open('/mount/src/spanish-app/audio_files.zip', 'rb') as f:
+    with open('zip_filename', 'rb') as f:
         download_button = st.button("Download zip", key="download_button", on_click=lambda: st.write(f.read()))
 
 #Show files in specified directory
