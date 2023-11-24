@@ -48,18 +48,30 @@ with tab1:
             sentences_csv_list.remove(".DS_Store")
             sentences_csv_list.remove("Audio")
             sentences_csv_list = [item.strip(".csv") for item in sentences_csv_list]
-            sentence_csv_selected = st.selectbox("Select file:", sentences_csv_list)
-            sentence_csv_to_download = sentences_csv_path + sentence_csv_selected + ".csv"
+            week_selected = st.selectbox("Select file:", sentences_csv_list)
+            sentence_csv_to_download = sentences_csv_path + week_selected + "_final.csv"
 
-            with open(sentence_csv_to_download, 'r') as f:
-                download_button = st.download_button(
-                    label = "Download CSV",
-                    data = f,
-                    file_name = sentence_csv_selected,
-                    mime = 'text/csv'
-                )
+            sentence_audio_path = "/mount/src/spanish-app/Sentences/Audio/"
+            sentence_audio_to_download = sentence_audio_path + week_selected
 
-            #with open()
+            download_csv_col, download_audio_csv = st.columns(2)
+
+            with download_csv_col:
+                with open(sentence_csv_to_download, 'r') as f:
+                    download_button = st.download_button(
+                        label = "Download CSV",
+                        data = f,
+                        file_name = week_selected,
+                        mime = 'text/csv'
+                    )
+
+            with download_audio_csv:
+                with open(sentence_audio_to_download, 'r') as f2:
+                    download_button = st.download_button(
+                        label = "Download audio",
+                        data = f2,
+                        file_name = week_selected
+                    )
         
 with tab2:
     feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
