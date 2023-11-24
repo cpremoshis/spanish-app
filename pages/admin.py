@@ -19,7 +19,7 @@ login_container = st.empty()
 
 with login_container.container():
     login_user = st.text_input("Username:")
-    login_pass = st.text_input("Password:")
+    login_pass = st.text_input("Password:", type="password")
     login_button = st.button("Log in")
 
 if login_button:
