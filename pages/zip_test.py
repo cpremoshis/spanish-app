@@ -3,5 +3,8 @@ import os
 from zipfile import ZipFile
 import base64
 
-os.remove('/mount/src/spanish-app/Sentences/Audio/audio_files.zip')
-os.remove('/mount/src/spanish-app/audio_files.zip')
+#Show files in specified directory
+dir_list = os.listdir("/mount/src/spanish-app/Sentences/Audio/")
+st.write(dir_list)
+
+#os.remove('/mount/src/spanish-app/Sentences/Audio/audio_files.zip')
