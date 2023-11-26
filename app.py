@@ -10,20 +10,25 @@ import re
 import pandas as pd
 import random
 from datetime import datetime
+import configparser
 
 #Page configuration
 st.set_page_config(
     page_title="Adelante y Más Allá",
-    page_icon="🇪🇸"
+    page_icon="🇪🇸",
+    initial_sidebar_state="collapsed"
     )
 
 #API key
-openai.api_key = st.secrets['openai']['api_key']
+#openai.api_key = st.secrets['openai']['api_key']
+config = configparser.ConfigParser()
+config.read('config.ini')
+openai.api_key = config['openai']['api_key']
 
-@st.cache_data
-def open_vocab_list(week_selection):
+@st.cache_data()
+def open_vocab_list(week):
 
-    vocab_file_path = vocab_files[week_selection]
+    vocab_file_path = vocab_files[week]
 
     with open(vocab_file_path, 'r') as f:
         vocab_reader = csv.reader(f)
@@ -74,7 +79,7 @@ def google_speech_sentences(row, df):
 
     tts = gTTS(text=text, lang="es")
 
-    audio_file_path = sentence_audio_path + st.session_state['week_selection'] + "/"
+    audio_file_path = sentence_audio_path + st.session_state['week_selection'] + "/" + "audio/"
     os.makedirs(audio_file_path, exist_ok=True)
     audio_file_path += str(index_number) + "_" + st.session_state['week_selection'] + "_" "audio.mp3"
 
@@ -147,6 +152,13 @@ def main():
     #Page layout
     st.title("Adelante y Más Allá")
 
+    #Adds default 'week_selection' to session state
+    if "week_selection" not in st.session_state:
+        st.session_state['week_selection'] = "Week 9"
+
+    #Creates list of only Spanish phrases from the vocab dict
+    #spanish_vocab = [re.sub(re_pattern, '', word).strip() for word in word_pairs.keys()]
+
     column1, column2 = st.columns(2)
 
     with column1:
@@ -154,49 +166,57 @@ def main():
         ["Vocab review", "Sentences", "Conversation"],
         )
     with column2:
-        week_selection = st.selectbox("Select week:",
-        ['Week 9']
+        st.session_state['week_selection'] = st.selectbox("Select week:",
+        ['Week 9', 'Week 10']
         )
 
     if tool_type == "Vocab review":
-        st.error("Add audio function")
+        st.error("Consider adding audio function")
         
-        if 'current_vocab_position' not in st.session_state:
-            st.session_state.current_vocab_position = 0
+        # Dictionary of Spanish-English word pairs
+        word_pairs = open_vocab_list(st.session_state['week_selection'])
 
-        if 'vocab_review_order' not in st.session_state:
-            st.session_state.vocab_review_order = random.sample(range(0, len(word_pairs)), len(word_pairs))
-
-        def vocab_previous_click():
-            if st.session_state.current_vocab_position <= 0:
-                st.session_state.current_vocab_position = len(st.session_state.vocab_review_order) - 1
-            else:
-                st.session_state.current_vocab_position -= 1
-        def vocab_next_click():
-            if st.session_state.current_vocab_position >= len(st.session_state.vocab_review_order) - 1:
+        try:
+            if 'current_vocab_position' not in st.session_state:
                 st.session_state.current_vocab_position = 0
-            else:
-                st.session_state.current_vocab_position += 1
 
-        with st.container():
+            if 'vocab_review_order' not in st.session_state:
+                st.session_state.vocab_review_order = random.sample(range(0, len(word_pairs)), len(word_pairs))
 
-            col_left, col_right = st.columns(2)
-            col_left.button("Previous", use_container_width=True, on_click=vocab_previous_click)
-            col_right.button("Next", use_container_width=True, on_click=vocab_next_click)
+            def vocab_previous_click():
+                if st.session_state.current_vocab_position <= 0:
+                    st.session_state.current_vocab_position = len(st.session_state.vocab_review_order) - 1
+                else:
+                    st.session_state.current_vocab_position -= 1
+            def vocab_next_click():
+                if st.session_state.current_vocab_position >= len(st.session_state.vocab_review_order) - 1:
+                    st.session_state.current_vocab_position = 0
+                else:
+                    st.session_state.current_vocab_position += 1
 
-            #st.write(st.session_state.current_vocab_position)
-            #st.write(st.session_state.vocab_review_order)
-            vocab_link_number = st.session_state.vocab_review_order[st.session_state.current_vocab_position]
-            #st.write(vocab_link_number)
+            with st.container():
 
-            #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
+                col_left, col_right = st.columns(2)
+                col_left.button("Previous", use_container_width=True, on_click=vocab_previous_click)
+                col_right.button("Next", use_container_width=True, on_click=vocab_next_click)
 
-            st.subheader("🇪🇸 " + list(word_pairs)[vocab_link_number], divider='orange')
-            st.text("  \n")
-            st.subheader("🇺🇸 " + list(word_pairs.values())[vocab_link_number], divider='orange')
+                #st.write(st.session_state.current_vocab_position)
+                #st.write(st.session_state.vocab_review_order)
+                vocab_link_number = st.session_state.vocab_review_order[st.session_state.current_vocab_position]
+                #st.write(vocab_link_number)
 
-        #Print debugging information
-        #st.write(f"Word pairs: {word_pairs}")
+                #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
+
+                st.subheader("🇪🇸 " + list(word_pairs)[vocab_link_number], divider='orange')
+                st.text("  \n")
+                st.subheader("🇺🇸 " + list(word_pairs.values())[vocab_link_number], divider='orange')
+
+            #Print debugging information
+            #st.write(f"Word pairs: {word_pairs}")
+
+        except Exception as error:
+            container = st.empty()
+            container.write(error)
 
     if tool_type == "Sentences":
         # https://docs.streamlit.io/library/advanced-features/button-behavior-and-examples
@@ -207,17 +227,17 @@ def main():
         container = st.container()
 
         @st.cache_data
-        def open_sentences():
-            check_for_sentences = os.path.isfile(sentence_files[week_selection])
+        def open_sentences(week):
+            check_for_sentences = os.path.isfile(sentence_files[week])
 
             if check_for_sentences == True:
-                with open(sentence_files[week_selection], 'r') as f:
+                with open(sentence_files[week], 'r') as f:
                     sentences_df = pd.read_csv(f, index_col=0)
             
             return sentences_df
         
         try:
-            sentences_df = open_sentences()
+            sentences_df = open_sentences(st.session_state['week_selection'])
 
             if 'review_order' not in st.session_state:
                 st.session_state.review_order = random.sample(range(0, len(sentences_df)), len(sentences_df))
@@ -264,47 +284,9 @@ def main():
                 col_left2.caption("All sentences are generated by AI.  \nPlease flag any issues for review.")
                 col_left2.button("Flag for review 🚩", on_click=submit_report)
 
-        except:
+        except Exception as error:
             container = st.empty()
-            container.write("No data loaded.")
-
-            generate_button = st.button("Generate")
-
-            if generate_button:
-
-                container.empty()
-
-                #check_for_sentences = os.path.isfile(sentence_files[week_selection])
-
-                #if check_for_sentences == True:
-                    #with open(sentence_files[week_selection], 'r') as f:
-                        #sentences_df = pd.read_csv(f, index_col=0)
-
-                    #st.write(sentences_df)
-                    ### More TBD
-
-                please_wait_message = st.empty()
-
-                with please_wait_message: 
-                    st.warning("You're the first one here. This will take several minutes. Please wait.")
-
-                    all_sentences = []
-
-                    #Sends chunks of vocab to ChatGPT for sentence generation, adds results to list
-                    for chunk in process_sentence_chunks(spanish_vocab):
-                        generated_sentences = generate_sentences(str(chunk))
-                        all_sentences.append("\n" + generated_sentences)
-
-                    #Splitting generated sentences into properly formatted list in preparation for audio creation
-                    sentences_df = process_generated_sentences(all_sentences)
-
-                    #Audio generation and saving of DataFrame as CSV
-                    sentences_df.loc[:,'Audio'] = sentences_df.apply(google_speech_sentences, df=sentences_df, axis=1)
-                    sentences_df.to_csv('./Sentences/' + week_selection + "_" + "final.csv")
-
-                please_wait_message.empty()
-
-                st.rerun()
+            container.write(error)
 
     if tool_type == "Conversation":
 
@@ -338,32 +320,24 @@ def main():
 #Update each time new week is added
 #root_file_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/"
 vocab_files = {
-    "Week 9": "./Vocab/Week 9.csv"
+    "Week 9": "./Vocab/Week 9.csv",
+    "Week 10": "./Vocab/Week 10.csv",
     }
 
 sentence_files = {
-    "Week 9": "./Sentences/Week 9_final.csv"
+    "Week 9": "./Sentences/Week 9/Week 9.csv",
+    "Week 10": "./Sentences/Week 10/Week 10.csv"
 }
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
     st.session_state.word_index = 0
 
-#Sets default 'week_selection'
-if 'week_selection' not in st.session_state:
-    st.session_state.week_selection = "Week 9"
-
-# Dictionary of Spanish-English word pairs
-word_pairs = open_vocab_list(st.session_state['week_selection'])
-
 #Regular expression to remove vocab items with parentheses
 re_pattern = r'\([^)]*\)'
 
-#Creates list of only Spanish phrases from the vocab dict
-spanish_vocab = [re.sub(re_pattern, '', word).strip() for word in word_pairs.keys()]
-
 #Path to sentence audio files
-sentence_audio_path = "./Sentences/Audio/"
+sentence_audio_path = "./Sentences/"
 
 if __name__ == "__main__":
     main()
