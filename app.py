@@ -65,6 +65,23 @@ def open_sentence_list(week_selection):
 
     return sentence_dict
 
+@st.cache_data
+def open_topics_list():
+    with open(chat_topics_file, 'r') as f:
+        topics_reader = csv.reader(f)
+
+        topics_dict = {}
+
+        for row in topics_reader:
+            if row:
+                key = row[0]
+                value = row[1]
+                topics_dict[key] = value
+            else:
+                pass
+
+    return topics_dict
+
 def google_speech(text, lang):
     tts = gTTS(text=text, lang=lang)
     audio_buffer = BytesIO()
@@ -118,11 +135,11 @@ def process_sentence_chunks(vocab_list, chunk_size=20):
     for i in range(0, len(vocab_list), chunk_size):
         yield vocab_list[i:i + chunk_size]
 
-def chat_with_gpt(prompt):
+def chat_with_gpt(topics, prompt):
     response = openai.chat.completions.create(
         model='gpt-3.5-turbo-1106',
         messages=[{'role':'user', 'content':prompt},
-                  {'role':'system', 'content':"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time but allow for mild deviation: issues facing refugees, personal online security."}],
+                  {'role':'system', 'content':f"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time but allow for mild deviation: {topics}."}],
         max_tokens=150,
         temperature=0.8
     )
@@ -295,26 +312,31 @@ def main():
         text_box = st.text_area('Type here:', "Hablemos de un tema de su elección.")
         submit_button = st.button("Submit")
 
-        if 'history' not in st.session_state:
-            st.session_state['history'] = ""
+        try:
+            topics_dict = open_topics_list()
+            
+            if 'history' not in st.session_state:
+                st.session_state['history'] = ""
 
-        if 'conversation_history' not in st.session_state:
-            st.session_state['conversation_history'] = []
+            if 'conversation_history' not in st.session_state:
+                st.session_state['conversation_history'] = []
 
-        if submit_button:
-            # Store user input in the session state immediately after the button is pressed
-            st.session_state['user_input'] = text_box
-            st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
+            if submit_button:
+                # Store user input in the session state immediately after the button is pressed
+                st.session_state['user_input'] = text_box
+                st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
 
-            gpt_response = chat_with_gpt("\n\n".join(st.session_state['conversation_history']))
-            st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
+                gpt_response = chat_with_gpt(topics_dict[st.session_state['week_selection']], "\n\n".join(st.session_state['conversation_history']))
+                st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
 
-            # Update the history
-            st.session_state['history'] += f"  \nUser: {st.session_state['user_input']}  \nGPT: {gpt_response}  \n"
+                # Update the history
+                st.session_state['history'] += f"  \nUser: {st.session_state['user_input']}  \nGPT: {gpt_response}  \n"
 
-        # Display the chat history outside the if block
-        write_chat_history()
-
+            # Display the chat history outside the if block
+            write_chat_history()
+        except Exception as error:
+            st.write(error)
+            
 #Dictionaries of vocab and sentence files
 #Update each time new week is added
 #root_file_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/"
@@ -329,6 +351,8 @@ sentence_files = {
     "Week 10": "./Sentences/Week 10/Week 10.csv",
     "Week 11": "./Sentences/Week 11/Week 11.csv"
 }
+
+chat_topics_file = "./Chat Topics/Chat Topics.csv"
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
