@@ -167,7 +167,7 @@ def main():
         )
     with column2:
         st.session_state['week_selection'] = st.selectbox("Select week:",
-        ['Week 9', 'Week 10']
+        ['Week 9', 'Week 10', 'Week 11']
         )
 
     if tool_type == "Vocab review":
@@ -321,11 +321,13 @@ def main():
 vocab_files = {
     "Week 9": "./Vocab/Week 9.csv",
     "Week 10": "./Vocab/Week 10.csv",
+    "Week 11": "./Vocab/Week 11.csv"
     }
 
 sentence_files = {
     "Week 9": "./Sentences/Week 9/Week 9.csv",
-    "Week 10": "./Sentences/Week 10/Week 10.csv"
+    "Week 10": "./Sentences/Week 10/Week 10.csv",
+    "Week 11": "./Sentences/Week 11/Week 11.csv"
 }
 
 #Sets default 'word_index'
