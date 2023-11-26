@@ -82,7 +82,7 @@ def create_sentences_from_vocab(vocab_df):
 
         #Audio generation and saving of DataFrame as CSV
         sentences_df.loc[:,'Audio'] = sentences_df.apply(google_speech_sentences, df=sentences_df, axis=1)
-        sentences_df['Audio'] = sentences_df['Audio'].str.replace("/Users/casey/Documents/PythonProjects/Spanish Learning App", ".")
+        sentences_df['Audio'] = sentences_df['Audio'].str.replace("/mount/src/spanish-app", ".")
         sentences_df.to_csv(sentence_csv_path + week_selection + ".csv")
 
         status = 1
@@ -96,10 +96,10 @@ def create_sentences_from_vocab(vocab_df):
 
 #API key
 try:
-    #openai.api_key = st.secrets['openai']['api_key']
-    config = configparser.ConfigParser()
-    config.read('/Users/casey/Documents/PythonProjects/Spanish Learning App/config.ini')
-    openai.api_key = config['openai']['api_key']
+    openai.api_key = st.secrets['openai']['api_key']
+    #config = configparser.ConfigParser()
+    #config.read('/Users/casey/Documents/PythonProjects/Spanish Learning App/config.ini')
+    #openai.api_key = config['openai']['api_key']
 except:
     pass
 
@@ -127,7 +127,7 @@ try:
 
         #Needed inputs for processing of uploaded CSV
         df_columns = ['Spanish', 'English']
-        sentence_csv_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/" + week_selection + "/"
+        sentence_csv_path = "/mount/src/spanish-app/Sentences/" + week_selection + "/"
         sentence_audio_path = sentence_csv_path + "audio/"
 
         if action_selection == 'Upload':
@@ -151,7 +151,7 @@ try:
         if action_selection == "Download":
             
             if type_selection == "Vocab":
-                vocab_files_path = "//Users/casey/Documents/PythonProjects/Spanish Learning App/Vocab/"
+                vocab_files_path = "/mount/src/spanish-app/Vocab/"
                 vocab_files_list = os.listdir(vocab_files_path)
                 vocab_files_list.remove(".DS_Store")
                 vocab_file_selected = st.selectbox("Select file:", vocab_files_list)
@@ -166,7 +166,7 @@ try:
                         )
                     
             if type_selection == "Sentences":
-                sentences_csv_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/" + week_selection + "/"
+                sentences_csv_path = "/mount/src/spanish-app/Sentences/" + week_selection + "/"
                 sentences_csv_list = os.listdir(sentences_csv_path)
                 sentences_csv_list.remove(".DS_Store")
                 sentences_csv_list.remove("audio")
@@ -199,8 +199,8 @@ try:
 
                         print(f"Zip file '{zip_filename}' created successfully.")
 
-                    folder_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/" + week_selection + "/audio/"
-                    zip_filename = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/" + week_selection + "/" + "audio_files.zip"
+                    folder_path = "/mount/src/spanish-app/Sentences/" + week_selection + "/audio/"
+                    zip_filename = "/mount/src/spanish-app/Sentences/" + week_selection + "/" + "audio_files.zip"
 
                     if st.button("Generate zip file"):
                         zip_folder(folder_path, zip_filename)
@@ -218,7 +218,7 @@ try:
     with tab3:
         
         try:
-            feedback_file = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Feedback/reports.txt"
+            feedback_file = "/mount/src/spanish-app/Feedback/reports.txt"
 
             with open(feedback_file, 'r') as f:
                 reports = f.read()
