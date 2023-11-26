@@ -96,6 +96,7 @@ def create_sentences_from_vocab(vocab_df):
 
 #API key
 try:
+    pass
     #openai.api_key = st.secrets['openai']['api_key']
     #config = configparser.ConfigParser()
     #config.read('/Users/casey/Documents/PythonProjects/Spanish Learning App/config.ini')
