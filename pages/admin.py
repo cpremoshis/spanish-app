@@ -96,12 +96,12 @@ def create_sentences_from_vocab(vocab_df):
 
 #API key
 try:
-    openai.api_key = st.secrets['openai']['api_key']
+    #openai.api_key = st.secrets['openai']['api_key']
     #config = configparser.ConfigParser()
     #config.read('/Users/casey/Documents/PythonProjects/Spanish Learning App/config.ini')
     #openai.api_key = config['openai']['api_key']
 except:
-    pass
+    st.error("Access denied.")
 
 
 try:
