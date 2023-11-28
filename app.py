@@ -20,10 +20,10 @@ st.set_page_config(
     )
 
 #API key
-#openai.api_key = st.secrets['openai']['api_key']
-config = configparser.ConfigParser()
-config.read('config.ini')
-openai.api_key = config['openai']['api_key']
+openai.api_key = st.secrets['openai']['api_key']
+#config = configparser.ConfigParser()
+#config.read('config.ini')
+#openai.api_key = config['openai']['api_key']
 
 @st.cache_data()
 def open_vocab_list(week):
