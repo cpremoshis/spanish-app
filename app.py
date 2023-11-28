@@ -20,10 +20,10 @@ st.set_page_config(
     )
 
 #API key
-openai.api_key = st.secrets['openai']['api_key']
-#config = configparser.ConfigParser()
-#config.read('config.ini')
-#openai.api_key = config['openai']['api_key']
+#openai.api_key = st.secrets['openai']['api_key']
+config = configparser.ConfigParser()
+config.read('config.ini')
+openai.api_key = config['openai']['api_key']
 
 @st.cache_data()
 def open_vocab_list(week):
@@ -183,11 +183,11 @@ def main():
         ["Vocab review", "Sentences", "Conversation"],
         )
     with column2:
-        st.session_state['week_selection'] = st.selectbox("Select week:",
-        ['Week 9', 'Week 10', 'Week 11', 'Administración y Gerencia', 'Consular', 'Diplomacia Pública', 'Economía', 'Política', 'Seguridad', 'USAID', 'Vocabulario General']
-        )
+        weeks_list = sentence_files.keys()
+        st.session_state['week_selection'] = st.selectbox("Select week:", weeks_list)
 
     if tool_type == "Vocab review":
+        st.error("Consider adding audio function")
         
         # Dictionary of Spanish-English word pairs
         word_pairs = open_vocab_list(st.session_state['week_selection'])
@@ -244,6 +244,7 @@ def main():
 
         @st.cache_data
         def open_sentences(week):
+            sentences_df = None
             check_for_sentences = os.path.isfile(sentence_files[week])
 
             if check_for_sentences == True:
@@ -340,33 +341,69 @@ def main():
 #Dictionaries of vocab and sentence files
 #Update each time new week is added
 #root_file_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/"
-vocab_files = {
-    "Week 9": "./Vocab/Week 9.csv",
-    "Week 10": "./Vocab/Week 10.csv",
-    "Week 11": "./Vocab/Week 11.csv",
-    "Administración y Gerencia": "./Vocab/Administración y Gerencia.csv",
-    "Consular": "./Vocab/Consular.csv",
-    "Diplomacia Pública": "./Vocab/Diplomacia Pública.csv",
-    "Economía": "./Vocab/Economía.csv",
-    "Política": "./Vocab/Política.csv",
-    "Seguridad": "./Vocab/Seguridad.csv",
-    "USAID": "./Vocab/USAID.csv",
-    "Vocabulario General": "./Vocab/Vocabulario General.csv"
-    }
 
-sentence_files = {
-    "Week 9": "./Sentences/Week 9/Week 9.csv",
-    "Week 10": "./Sentences/Week 10/Week 10.csv",
-    "Week 11": "./Sentences/Week 11/Week 11.csv",
-    "Administración y Gerencia": "./Sentences/Administración y Gerencia/Administración y Gerencia.csv",
-    "Consular": "./Sentences/Consular/Consular.csv",
-    "Diplomacia Pública": "./Sentences/Diplomacia Pública/Diplomacia Pública.csv",
-    "Economía": "./Sentences/Economía/Economía.csv",
-    "Política": "./Sentences/Política/Política.csv",
-    "Seguridad": "./Sentences/Seguridad/Seguridad.csv",
-    "USAID": "./Sentences/USAID/USAID.csv",
-    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
-}
+#Show files in specified directory
+@st.cache_data()
+def find_vocab_files():
+    vocab_dir_list = os.listdir("./Vocab")
+    vocab_dir_list.remove(".DS_Store")
+    vocab_files = {}
+
+    for item in vocab_dir_list:
+        key = item.replace('.csv', '')
+        value = "./Vocab/" + key + ".csv"
+        vocab_files[key] = value
+
+    return vocab_files
+
+vocab_files = find_vocab_files()
+
+#vocab_files = {
+#    "Week 9": "./Vocab/Week 9.csv",
+#    "Week 10": "./Vocab/Week 10.csv",
+#    "Week 11": "./Vocab/Week 11.csv",
+#    "Administración y Gerencia": "./Vocab/Administración y Gerencia.csv",
+#    "Consular": "./Vocab/Consular.csv",
+#    "Diplomacia Pública": "./Vocab/Diplomacia Pública.csv",
+#    "Economía": "./Vocab/Economía.csv",
+#    "Política": "./Vocab/Política.csv",
+#    "Seguridad": "./Vocab/Seguridad.csv",
+#    "USAID": "./Vocab/USAID.csv",
+#    "Vocabulario General": "./Vocab/Vocabulario General.csv"
+#    }
+
+@st.cache_data()
+def find_sentence_files():
+    sentences_root_folder = "./Sentences"
+    sentence_dir_list = os.listdir(sentences_root_folder)
+    sentence_dir_list.remove(".DS_Store")
+    sentence_files = {}
+
+    for item in sentence_dir_list:
+        folder_contents = os.listdir(sentences_root_folder + "/" + item)
+
+        for file in folder_contents:
+            if ".csv" in file:
+                final_file = file
+                sentence_files[file.strip('.csv')] = sentences_root_folder + "/" + item + "/" + final_file
+
+    return sentence_files
+
+sentence_files = find_sentence_files()
+
+#sentence_files = {
+#    "Week 9": "./Sentences/Week 9/Week 9.csv",
+#    "Week 10": "./Sentences/Week 10/Week 10.csv",
+#    "Week 11": "./Sentences/Week 11/Week 11.csv",
+#    "Administración y Gerencia": "./Sentences/Administración y Gerencia/Administración y Gerencia.csv",
+#    "Consular": "./Sentences/Consular/Consular.csv",
+#    "Diplomacia Pública": "./Sentences/Diplomacia Pública/iplomacia Pública.csv",
+#    "Economía": "./Sentences/Economía/Economía.csv",
+#    "Política": "./Sentences/Política/Política.csv",
+#    "Seguridad": "./Sentences/Seguridad/Seguridad.csv",
+#    "USAID": "./Sentences/USAID/USAID.csv",
+#    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
+#}
 
 chat_topics_file = "./Chat Topics/Chat Topics.csv"
 
