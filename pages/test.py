@@ -17,3 +17,6 @@ def find_vocab_files():
 vocab_files = find_vocab_files()
 
 st.write(vocab_files)
+
+for key in vocab_files.keys():
+    print("ASCII values of key in vocab_files:", [ord(c) for c in key])
