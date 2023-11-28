@@ -283,7 +283,7 @@ def main():
 
                 def open_audio():
                     with open(sentences_df.iloc[link_number]['Audio'], 'rb') as audio:
-                        audio_file = BytesIO(audio)
+                        audio_file = BytesIO(audio.read())
                         return audio_file
                 audio_file = open_audio
                 st.audio(audio_file, format='audio/mp3')
