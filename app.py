@@ -314,6 +314,8 @@ def main():
         text_box = st.text_area('Type here:', "Hablemos de un tema de su elección.")
         submit_button = st.button("Submit")
 
+        topics_df = open_topics_list()
+
         try:
             
             
@@ -407,7 +409,7 @@ sentence_files = find_sentence_files()
 #    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
 #}
 
-topics_df = open_topics_list()
+
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
