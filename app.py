@@ -14,16 +14,16 @@ from datetime import datetime
 import configparser
 import unicodedata
 
-with open("google_analytics.html", "r") as f:
-    html_code = f.read()
-    components.html(html_code, height=0)
-
 #Page configuration
 st.set_page_config(
     page_title="Adelante y Más Allá",
     page_icon="🇪🇸",
     initial_sidebar_state="collapsed"
     )
+
+with open("google_analytics.html", "r") as f:
+    html_code = f.read()
+    components.html(html_code, height=0)
 
 #API key
 openai.api_key = st.secrets['openai']['api_key']
