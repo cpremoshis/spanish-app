@@ -281,9 +281,12 @@ def main():
                 link_number = st.session_state.review_order[st.session_state.current_position]
                 #st.write(link_number)
 
-                st.write(type(sentences_df.iloc[link_number]['Audio']))
-                st.write(sentences_df.iloc[link_number]['Audio'])
-                st.audio(sentences_df.iloc[link_number]['Audio'])
+                def open_audio():
+                    with open(sentences_df.iloc[link_number]['Audio'], 'rb') as audio:
+                        audio_file = BytesIO(audio)
+                        return audio_file
+                audio_file = open_audio
+                st.audio(audio_file)
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                 #st.write(sentences_df.iloc[link_number]['Spanish'])
