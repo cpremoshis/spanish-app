@@ -249,7 +249,7 @@ def main():
 
             if check_for_sentences == True:
                 with open(sentence_files[week], 'r') as f:
-                    sentences_df = pd.read_csv(f, index_col=0)
+                    sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
             
             return sentences_df
         
