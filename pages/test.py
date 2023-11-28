@@ -1,13 +1,26 @@
 import streamlit as st
 import os
 import pandas as pd
+import unicodedata
 
 chat_topics_file = "./Chat Topics/Chat Topics.csv"
 col_names = ['Week', 'Topics']
 
 def open_topics_list():
+
+    chat_topics_file = "./Chat Topics/Chat Topics.csv"
+    col_names = ['Week', 'Topics']
+
     with open(chat_topics_file, 'r') as f:
         topics_df = pd.read_csv(f, names=col_names)
+
+    def normalize(row):
+        pre_normalized = row['Week']
+        normalized = unicodedata.normalize('NFC', pre_normalized)
+
+        return normalized
+    
+    topics_df[:,'Week'] = topics_df.apply(normalize, axis=1)
 
     return topics_df
 
