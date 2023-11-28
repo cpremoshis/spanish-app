@@ -5,7 +5,7 @@ import unicodedata
 
 
 def open_sentences():
-    sentences = "cpremoshis/spanish-app/Sentences/Economía/Economía.csv"
+    sentences = "/mount/src/spanish-app/Sentences/Economía/Economía.csv"
     sentences_normalized = unicodedata.normalize("NFC", sentences)
 
     with open(sentences_normalized, 'r') as f:
