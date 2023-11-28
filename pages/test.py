@@ -1,21 +1,10 @@
 import streamlit as st
 import os
+import pandas as pd
 
-def find_sentence_files():
-    sentences_root_folder = "./Sentences"
-    sentence_dir_list = os.listdir(sentences_root_folder)
-    sentence_dir_list.remove(".DS_Store")
-    sentence_files = {}
+file = "cpremoshis/spanish-app/Sentences/Economía/Economía.csv"
 
-    for item in sentence_dir_list:
-        folder_contents = os.listdir(sentences_root_folder + "/" + item)
+with open('cpremoshis/spanish-app/Sentences/Economía/Economía.csv', 'r') as f:
+    df = pd.read_csv(f, index_col=0)
 
-        for file in folder_contents:
-            if ".csv" in file:
-                final_file = file
-                sentence_files[file.strip('.csv')] = sentences_root_folder + "/" + item + "/" + final_file
-
-    return sentence_files
-
-sentence_files = find_sentence_files()
-st.write(sentence_files)
+st.write(df)
