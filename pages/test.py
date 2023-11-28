@@ -2,27 +2,15 @@ import streamlit as st
 import os
 import pandas as pd
 
-def find_vocab_files():
-    vocab_dir_list = os.listdir("./Vocab")
-    vocab_dir_list.remove(".DS_Store")
-    vocab_files = {}
+chat_topics_file = "./Chat Topics/Chat Topics.csv"
+col_names = ['Week', 'Topics']
 
-    for item in vocab_dir_list:
-        key = item.replace('.csv', '')
-        value = "./Vocab/" + key + ".csv"
-        vocab_files[key] = value
+def open_topics_list():
+    with open(chat_topics_file, 'r') as f:
+        topics_df = pd.read_csv(f, names=col_names)
 
-    return vocab_files
+    return topics_df
 
-vocab_files = find_vocab_files()
+topics_df = open_topics_list()
 
-st.write(vocab_files)
-
-col1, col2 = st.columns(2)
-
-with col1:
-    for key in vocab_files.keys():
-        st.write("ASCII values of key in vocab_files:", [ord(c) for c in key])
-with col2:
-    for key in vocab_files.keys():
-        st.write(f"Key: {key}, ASCII values: {[ord(c) for c in key]}")
+st.write(topics_df)
