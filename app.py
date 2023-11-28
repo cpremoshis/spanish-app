@@ -11,6 +11,7 @@ import pandas as pd
 import random
 from datetime import datetime
 import configparser
+import unicodedata
 
 #Page configuration
 st.set_page_config(
@@ -281,7 +282,9 @@ def main():
                 link_number = st.session_state.review_order[st.session_state.current_position]
                 #st.write(link_number)
 
-                st.audio(sentences_df.iloc[link_number]['Audio'])
+                audio_path = sentences_df.iloc[link_number]['Audio']
+                normalized_audio_path = unicodedata.normalize('NFC', audio_path)
+                st.audio(normalized_audio_path)
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                 #st.write(sentences_df.iloc[link_number]['Spanish'])
