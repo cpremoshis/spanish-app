@@ -245,7 +245,7 @@ def main():
         @st.cache_data
         def open_sentences(week):
             sentences_df = None
-            check_for_sentences = os.path.isfile(sentence_files[week])
+            check_for_sentences = os.path.isfile(sentence_files[str(week)])
 
             if check_for_sentences == True:
                 with open(sentence_files[week], 'r') as f:
