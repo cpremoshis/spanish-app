@@ -174,8 +174,6 @@ def main():
     if "week_selection" not in st.session_state:
         st.session_state['week_selection'] = "Week 9"
 
-    normalized_week_selection = unicodedata.normalize('NFC', st.session_state['week_selection'])
-
     #Creates list of only Spanish phrases from the vocab dict
     #spanish_vocab = [re.sub(re_pattern, '', word).strip() for word in word_pairs.keys()]
 
@@ -331,7 +329,7 @@ def main():
                 st.session_state['user_input'] = text_box
                 st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
 
-                gpt_response = chat_with_gpt(topics_dict[normalized_week_selection], "\n\n".join(st.session_state['conversation_history']))
+                gpt_response = chat_with_gpt(topics_dict[st.session_state['week_selection']], "\n\n".join(st.session_state['conversation_history']))
                 st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
 
                 # Update the history
