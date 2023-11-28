@@ -14,3 +14,9 @@ def open_topics_list():
 topics_df = open_topics_list()
 
 st.write(topics_df)
+
+hardcode = 'Diplomacia Pública'
+df_path = topics_df.iloc[4]['Week']
+
+st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcode])
+st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
