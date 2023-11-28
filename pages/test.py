@@ -18,9 +18,9 @@ df_path = df.iloc[0]['Audio']
 
 col1, col2 = st.columns(2)
 
-col1:
+with col1:
     st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcoded_path])
-col2:
+with col2:
     st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
 
 
