@@ -282,6 +282,9 @@ def main():
 
                 audio_path = sentences_df.iloc[link_number]['Audio']
                 normalized_audio_path = unicodedata.normalize('NFC', audio_path)
+                
+                st.write("Path from DF bytes:", [hex(ord(c)) for c in audio_path])
+                st.write("NOrmalized path bytes:", [hex(ord(c)) for c in normalized_audio_path])
                 st.audio(normalized_audio_path)
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
