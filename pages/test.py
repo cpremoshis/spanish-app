@@ -24,6 +24,3 @@ with col2:
     st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
 
 #st.write(senteces_df[senteces_df['Week'] == 'USAID']['Topics'])
-
-files = os.listdir("/mount/admin/install_path/")
-st.write(files)

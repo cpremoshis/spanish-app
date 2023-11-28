@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from gtts import gTTS
 from io import BytesIO
 #import speech_recognition as sr
@@ -12,6 +13,10 @@ import random
 from datetime import datetime
 import configparser
 import unicodedata
+
+with open("google_analytics.html", "r") as f:
+    html_code = f.read()
+    components.html(html_code, height=0)
 
 #Page configuration
 st.set_page_config(
