@@ -25,5 +25,5 @@ with col2:
 
 #st.write(senteces_df[senteces_df['Week'] == 'USAID']['Topics'])
 
-files = os.listdir("/mount/")
+files = os.listdir("/mount/admin/")
 st.write(files)
