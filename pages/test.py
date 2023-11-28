@@ -11,6 +11,6 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-audio = "./Sentences/Política/audio/48_Política_audio.mp3"
+audio = df.iloc[0]['Audio']
 
-st.audio("./Sentences/Política/audio/48_Política_audio.mp3")
+st.audio(audio)
