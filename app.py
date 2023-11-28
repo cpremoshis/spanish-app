@@ -281,6 +281,7 @@ def main():
                 link_number = st.session_state.review_order[st.session_state.current_position]
                 #st.write(link_number)
 
+                st.write(type(sentences_df.iloc[link_number]['Audio']))
                 st.audio(sentences_df.iloc[link_number]['Audio'])
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
