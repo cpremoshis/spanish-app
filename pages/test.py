@@ -25,12 +25,5 @@ with col2:
 
 #st.write(senteces_df[senteces_df['Week'] == 'USAID']['Topics'])
 
-config_file = "~/.streamlit/config.toml"
-
-with open(config_file, 'r') as f:
-    config_text = f.read()
-
-st.write(config_text)
-
 files = os.listdir("/mount/admin/")
 st.write(files)
