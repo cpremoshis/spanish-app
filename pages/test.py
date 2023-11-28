@@ -6,7 +6,6 @@ import unicodedata
 
 def open_sentences():
     sentences = "/mount/src/spanish-app/Sentences/Economía/Economía.csv"
-    sentences_normalized = unicodedata.normalize("NFC", sentences)
 
     with open(sentences_normalized, 'r') as f:
         sentences_df = pd.read_csv(f, index_col=0)
