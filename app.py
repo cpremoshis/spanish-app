@@ -283,9 +283,9 @@ def main():
 
                 def open_audio():
                     with open(sentences_df.iloc[link_number]['Audio'], 'rb') as audio:
-                        audio_file = BytesIO(audio.read())
+                        audio_file = BytesIO(audio)
                         return audio_file
-                audio_file = open_audio
+                audio_file = open_audio()
                 st.audio(audio_file, format='audio/mp3')
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
