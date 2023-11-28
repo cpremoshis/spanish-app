@@ -7,7 +7,7 @@ import unicodedata
 def open_sentences():
     sentences = "/mount/src/spanish-app/Sentences/Economía/Economía.csv"
 
-    with open(sentences_normalized, 'r') as f:
+    with open(sentences, 'r') as f:
         sentences_df = pd.read_csv(f, index_col=0)
     
     return sentences_df
