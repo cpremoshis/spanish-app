@@ -5,7 +5,7 @@ import unicodedata
 
 
 def open_sentences():
-    sentences = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/Economía/Economía.csv"
+    sentences = "./Sentences/Economía/Economía.csv"
 
     with open(sentences, 'r') as f:
         sentences_df = pd.read_csv(f, index_col=0)
