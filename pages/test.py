@@ -2,37 +2,18 @@ import streamlit as st
 import os
 import pandas as pd
 
-file_path = "./Sentences/Diplomacia Pública/Diplomacia Publica.csv"
+def find_vocab_files():
+    vocab_dir_list = os.listdir("./Vocab")
+    vocab_dir_list.remove(".DS_Store")
+    vocab_files = {}
 
-try:
-    with open(file_path, 'r') as f:
-        df = pd.read_csv(f, index_col=0)
-    st.write(df)
-except Exception as e:
-    st.error(f"An error occurred: {e}")
+    for item in vocab_dir_list:
+        key = item.replace('.csv', '')
+        value = "./Vocab/" + key + ".csv"
+        vocab_files[key] = value
 
-#import unicodedata
+    return vocab_files
 
-# Normalize the path from the DataFrame
-#df_path = df.iloc[0]['Audio']
-#normalized_path = unicodedata.normalize('NFC', df_path)
+vocab_files = find_vocab_files()
 
-# Now try using the normalized path
-#st.audio(normalized_path)
-
-
-hardcoded_path = './Sentences/Diplomacia Pública/Diplomacia Publica.csv'
-df_path = df.iloc[0]['Audio']
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcoded_path])
-with col2:
-    st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
-
-
-#st.audio('./Sentences/Política/audio/1_Política_audio.mp3')
-
-
-#st.audio(audio_path)
+st.write(vocab_files)
