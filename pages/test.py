@@ -11,6 +11,6 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-audio = df.iloc[0]['Audio']
+#audio = df.iloc[0]['Audio']
 
-st.audio(audio)
+st.audio(df.iloc[0]['Audio'])
