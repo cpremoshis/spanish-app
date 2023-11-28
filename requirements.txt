@@ -1,8 +1,9 @@
 altair
 numpy
-pandas == 2.1.3
+pandas
 pydeck
 streamlit
 openai
 gTTS
 seedir
+google-cloud-texttospeech
