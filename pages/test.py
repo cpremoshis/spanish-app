@@ -23,6 +23,13 @@ audio_path_df_normalized = unicodedata.normalize('NFKD', audio_path_df).encode('
 st.audio(audio_path_df_normalized)
 
 
+hardcoded_path = './Sentences/Política/audio/0_Política_audio.mp3'
+df_path = df.iloc[0]['Audio']
+
+st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcoded_path])
+st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
+
+
 #st.audio('./Sentences/Política/audio/1_Política_audio.mp3')
 
 
