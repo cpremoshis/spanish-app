@@ -11,7 +11,10 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-check = os.path.isfile(df.iloc[0]['Audio'])
+audio_path = df.iloc[0]['Audio']
+audio_path = audio_path.encode('utf-8').decode('utf-8')
+
+check = os.path.isfile(audio_path)
 st.write(check)
 
-st.audio(df.iloc[0]['Audio'])
+st.audio(audio_path)
