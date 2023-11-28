@@ -4,27 +4,23 @@ import pandas as pd
 import unicodedata
 
 
-def open_topics_list():
+def open_sentences():
+    sentences = "/Users/casey/Documents/PythonProjects/Spanish Learning App/Sentences/Economía/Economía.csv"
 
-    chat_topics_file = "./Chat Topics/Chat Topics.csv"
-    col_names = ['Week', 'Topics']
-
-    with open(chat_topics_file, 'r') as f:
-        topics_df = pd.read_csv(f, names=col_names, encoding='utf-8')
-
-    def normalize_characters(text):
-        return unicodedata.normalize('NFC', text)
+    with open(sentences, 'r') as f:
+        sentences_df = pd.read_csv(f, index_col=0)
     
-    topics_df['Week'] = topics_df['Week'].apply(normalize_characters)
+    return sentences_df
 
-    return topics_df
+senteces_df = open_sentences()
 
-topics_df = open_topics_list()
+hardcode = './Sentences/Economía/audio/4_Economía_audio.mp3'
+df_path = senteces_df.iloc[4]['Audio']
 
-#st.write(topics_df)
+col1, col2 = st.columns(2)
+with col1:
+    st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcode])
+with col2:
+    st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
 
-hardcode = 'Diplomacia Pública'
-df_path = topics_df.iloc[4]['Week']
-
-st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcode])
-st.write("DataFrame path bytes:", [hex(ord(c)) for c in df_path])
+#st.write(senteces_df[senteces_df['Week'] == 'USAID']['Topics'])
