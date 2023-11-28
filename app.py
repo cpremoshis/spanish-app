@@ -66,23 +66,6 @@ def open_sentence_list(week_selection):
 
     return sentence_dict
 
-@st.cache_data
-def open_topics_list():
-    with open(chat_topics_file, 'r') as f:
-        topics_reader = csv.reader(f)
-
-        topics_dict = {}
-
-        for row in topics_reader:
-            if row:
-                key = row[0]
-                value = row[1]
-                topics_dict[key] = value
-            else:
-                pass
-
-    return topics_dict
-
 def google_speech(text, lang):
     tts = gTTS(text=text, lang=lang)
     audio_buffer = BytesIO()
@@ -316,7 +299,7 @@ def main():
         submit_button = st.button("Submit")
 
         try:
-            topics_dict = open_topics_list()
+            
             
             if 'history' not in st.session_state:
                 st.session_state['history'] = ""
@@ -408,7 +391,26 @@ sentence_files = find_sentence_files()
 #    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
 #}
 
-chat_topics_file = "./Chat Topics/Chat Topics.csv"
+@st.cache_data
+def open_topics_list():
+
+    chat_topics_file = "./Chat Topics/Chat Topics.csv"
+    col_names = ['Week', 'Topics']
+
+    with open(chat_topics_file, 'r') as f:
+        topics_df = pd.read_csv(f, names=col_names)
+
+    def normalize(row):
+        pre_normalized = row['Week']
+        normalized = unicodedata.normalize('NFC', pre_normalized)
+
+        return normalized
+    
+    topics_df[:,'Week'] = topics_df.apply(normalize, axis=1)
+
+    return topics_df
+
+topics_dict = open_topics_list()
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
