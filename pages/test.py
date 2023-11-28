@@ -11,7 +11,7 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-st.audio('./Sentences/Política/audio/0_Política_audio.mp3')
+st.audio('./Sentences/Política/audio/1_Política_audio.mp3')
 
 
 #st.audio(audio_path)
