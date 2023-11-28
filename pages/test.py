@@ -24,7 +24,7 @@ def open_topics_list():
 
 topics_df = open_topics_list()
 
-st.write(topics_df)
+#st.write(topics_df)
 
 hardcode = 'Diplomacia Pública'
 df_path = topics_df.iloc[4]['Week']
