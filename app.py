@@ -66,6 +66,22 @@ def open_sentence_list(week_selection):
 
     return sentence_dict
 
+@st.cache_data
+def open_topics_list():
+
+    chat_topics_file = "./Chat Topics/Chat Topics.csv"
+    col_names = ['Week', 'Topics']
+
+    with open(chat_topics_file, 'r') as f:
+        topics_df = pd.read_csv(f, names=col_names, encoding='utf-8')
+
+    def normalize_characters(text):
+        return unicodedata.normalize('NFC', text)
+    
+    topics_df['Week'] = topics_df['Week'].apply(normalize_characters)
+
+    return topics_df
+
 def google_speech(text, lang):
     tts = gTTS(text=text, lang=lang)
     audio_buffer = BytesIO()
@@ -390,22 +406,6 @@ sentence_files = find_sentence_files()
 #    "USAID": "./Sentences/USAID/USAID.csv",
 #    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
 #}
-
-@st.cache_data
-def open_topics_list():
-
-    chat_topics_file = "./Chat Topics/Chat Topics.csv"
-    col_names = ['Week', 'Topics']
-
-    with open(chat_topics_file, 'r') as f:
-        topics_df = pd.read_csv(f, names=col_names, encoding='utf-8')
-
-    def normalize_characters(text):
-        return unicodedata.normalize('NFC', text)
-    
-    topics_df['Week'] = topics_df['Week'].apply(normalize_characters)
-
-    return topics_df
 
 topics_df = open_topics_list()
 
