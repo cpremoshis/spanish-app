@@ -359,7 +359,6 @@ def find_vocab_files():
     return vocab_files
 
 vocab_files = find_vocab_files()
-vocab_files = {unicodedata.normalize('NFC', k): v for k, v in vocab_files.items()}
 
 
 #vocab_files = {
