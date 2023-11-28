@@ -280,9 +280,12 @@ def main():
                 link_number = st.session_state.review_order[st.session_state.current_position]
                 #st.write(link_number)
 
-                audio_path = sentences_df.iloc[link_number]['Audio']
-                normalized_audio_path = unicodedata.normalize('NFC', audio_path)
-                st.audio(normalized_audio_path)
+                if st.session_state['week_selection'] != 'Economía':
+                    audio_path = sentences_df.iloc[link_number]['Audio']
+                    normalized_audio_path = unicodedata.normalize('NFC', audio_path)
+                    st.audio(normalized_audio_path)
+                else:
+                    pass
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                 #st.write(sentences_df.iloc[link_number]['Spanish'])
