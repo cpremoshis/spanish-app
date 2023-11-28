@@ -11,16 +11,6 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-import unicodedata
-
-# Fetch the path from DataFrame
-audio_path_df = df.iloc[0]['Audio']
-
-# Normalize and re-encode
-audio_path_df_normalized = unicodedata.normalize('NFKD', audio_path_df).encode('ascii', 'ignore').decode('ascii')
-
-# Try using the normalized path
-st.audio(audio_path_df_normalized)
 
 
 hardcoded_path = './Sentences/Política/audio/0_Política_audio.mp3'
