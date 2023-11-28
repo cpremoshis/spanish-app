@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 
-file_path = "./Sentences/Economia/Economia.csv"
+file_path = "./Sentences/Política/Política.csv"
 
 try:
     with open(file_path, 'r') as f:
