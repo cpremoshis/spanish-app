@@ -360,7 +360,7 @@ sentence_files = {
     "Week 11": "./Sentences/Week 11/Week 11.csv",
     "Administración y Gerencia": "./Sentences/Administración y Gerencia/Administración y Gerencia.csv",
     "Consular": "./Sentences/Consular/Consular.csv",
-    "Diplomacia Pública": "./Sentences/Diplomacia Pública/iplomacia Pública.csv",
+    "Diplomacia Pública": "./Sentences/Diplomacia Pública/Diplomacia Pública.csv",
     "Economía": "./Sentences/Economía/Economía.csv",
     "Política": "./Sentences/Política/Política.csv",
     "Seguridad": "./Sentences/Seguridad/Seguridad.csv",
