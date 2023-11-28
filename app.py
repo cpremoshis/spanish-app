@@ -20,10 +20,10 @@ st.set_page_config(
     )
 
 #API key
-openai.api_key = st.secrets['openai']['api_key']
-#config = configparser.ConfigParser()
-#config.read('config.ini')
-#openai.api_key = config['openai']['api_key']
+#openai.api_key = st.secrets['openai']['api_key']
+config = configparser.ConfigParser()
+config.read('config.ini')
+openai.api_key = config['openai']['api_key']
 
 @st.cache_data()
 def open_vocab_list(week):
@@ -184,11 +184,12 @@ def main():
         )
     with column2:
         st.session_state['week_selection'] = st.selectbox("Select week:",
-        ['Week 9', 'Week 10', 'Week 11']
+        ['Week 9', 'Week 10', 'Week 11', 'Administración y Gerencia', 'Consular', 'Diplomacia Pública', 'Economía', 'Política', 'Seguridad', 'USAID', 'Vocabulario General']
         )
 
     if tool_type == "Vocab review":
-
+        st.error("Consider adding audio function")
+        
         # Dictionary of Spanish-English word pairs
         word_pairs = open_vocab_list(st.session_state['week_selection'])
 
@@ -336,20 +337,36 @@ def main():
             write_chat_history()
         except Exception as error:
             st.write(error)
-            
+
 #Dictionaries of vocab and sentence files
 #Update each time new week is added
 #root_file_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/"
 vocab_files = {
     "Week 9": "./Vocab/Week 9.csv",
     "Week 10": "./Vocab/Week 10.csv",
-    "Week 11": "./Vocab/Week 11.csv"
+    "Week 11": "./Vocab/Week 11.csv",
+    "Administración y Gerencia": "./Vocab/Administración y Gerencia.csv",
+    "Consular": "./Vocab/Consular.csv",
+    "Diplomacia Pública": "./Vocab/Diplomacia Pública.csv",
+    "Economía": "./Vocab/Economía.csv",
+    "Política": "./Vocab/Política.csv",
+    "Seguridad": "./Vocab/Seguridad.csv",
+    "USAID": "./Vocab/USAID.csv",
+    "Vocabulario General": "./Vocab/Vocabulario General.csv"
     }
 
 sentence_files = {
     "Week 9": "./Sentences/Week 9/Week 9.csv",
     "Week 10": "./Sentences/Week 10/Week 10.csv",
-    "Week 11": "./Sentences/Week 11/Week 11.csv"
+    "Week 11": "./Sentences/Week 11/Week 11.csv",
+    "Administración y Gerencia": "./Sentences/Administración y Gerencia/Administración y Gerencia.csv",
+    "Consular": "./Sentences/Consular/Consular.csv",
+    "Diplomacia Pública": "./Sentences/iplomacia Pública/iplomacia Pública.csv",
+    "Economía": "./Sentences/Economía/Economía.csv",
+    "Política": "./Sentences/Política/Política.csv",
+    "Seguridad": "./Sentences/Seguridad/Seguridad.csv",
+    "USAID": "./Sentences/USAID/USAID.csv",
+    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
 }
 
 chat_topics_file = "./Chat Topics/Chat Topics.csv"
