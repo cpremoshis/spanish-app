@@ -3,8 +3,6 @@ import os
 import pandas as pd
 import unicodedata
 
-chat_topics_file = "./Chat Topics/Chat Topics.csv"
-col_names = ['Week', 'Topics']
 
 def open_topics_list():
 
