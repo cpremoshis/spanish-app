@@ -14,7 +14,7 @@ def open_sentences():
 
 senteces_df = open_sentences()
 
-hardcode = './Sentences/Economía/audio/4_Economía_audio.mp3'
+hardcode = './Sentences/Economía/audio/4_Economía_audio.mp3'
 df_path = senteces_df.iloc[4]['Audio']
 
 col1, col2 = st.columns(2)
