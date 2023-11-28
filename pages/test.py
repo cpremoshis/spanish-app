@@ -11,10 +11,7 @@ try:
 except Exception as e:
     st.error(f"An error occurred: {e}")
 
-audio_path = df.iloc[0]['Audio']
-audio_path = audio_path.encode('utf-8').decode('utf-8')
+st.audio('./Sentences/Política/audio/0_Política_audio.mp3')
 
-check = os.path.isfile(audio_path)
-st.write(check)
 
-st.audio(audio_path)
+#st.audio(audio_path)
