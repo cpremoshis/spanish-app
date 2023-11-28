@@ -10,7 +10,7 @@ def open_topics_list():
     col_names = ['Week', 'Topics']
 
     with open(chat_topics_file, 'r') as f:
-        topics_df = pd.read_csv(f, names=col_names)
+        topics_df = pd.read_csv(f, names=col_names, encoding='utf-8')
 
     return topics_df
 
