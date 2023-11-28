@@ -18,5 +18,11 @@ vocab_files = find_vocab_files()
 
 st.write(vocab_files)
 
-for key in vocab_files.keys():
-    st.write("ASCII values of key in vocab_files:", [ord(c) for c in key])
+col1, col2 = st.columns(2)
+
+with col1:
+    for key in vocab_files.keys():
+        st.write("ASCII values of key in vocab_files:", [ord(c) for c in key])
+with col2:
+    for key in vocab_files.keys():
+        st.write(f"Key: {key}, ASCII values: {[ord(c) for c in key]}")
