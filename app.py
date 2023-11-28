@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 from gtts import gTTS
 from io import BytesIO
 #import speech_recognition as sr
@@ -20,10 +19,6 @@ st.set_page_config(
     page_icon="🇪🇸",
     initial_sidebar_state="collapsed"
     )
-
-with open("google_analytics.html", "r") as f:
-    html_code = f.read()
-    components.html(html_code, height=0)
 
 #API key
 openai.api_key = st.secrets['openai']['api_key']
