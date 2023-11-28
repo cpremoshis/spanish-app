@@ -188,8 +188,7 @@ def main():
         st.session_state['week_selection'] = st.selectbox("Select week:", weeks_list)
 
     if tool_type == "Vocab review":
-        st.error("Consider adding audio function")
-        
+
         # Dictionary of Spanish-English word pairs
         word_pairs = open_vocab_list(st.session_state['week_selection'])
 
