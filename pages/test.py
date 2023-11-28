@@ -2,7 +2,7 @@ import streamlit as st
 import os
 import pandas as pd
 
-file_path = "cpremoshis/spanish-app/Sentences/Economía/Economía.csv"
+file_path = "cpremoshis/spanish-app/Sentences/Economia/Economía.csv"
 
 if os.path.isfile(file_path):
     try:
