@@ -282,6 +282,7 @@ def main():
                 #st.write(link_number)
 
                 st.write(type(sentences_df.iloc[link_number]['Audio']))
+                st.write(sentences_df.iloc[link_number]['Audio'])
                 st.audio(sentences_df.iloc[link_number]['Audio'])
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
