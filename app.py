@@ -241,9 +241,6 @@ def main():
     if tool_type == "Sentences":
         # https://docs.streamlit.io/library/advanced-features/button-behavior-and-examples
 
-        if 'current_position' not in st.session_state:
-            st.session_state.current_position = 0
-
         container = st.container()
 
         @st.cache_data
@@ -260,7 +257,14 @@ def main():
         try:
             sentences_df = open_sentences(st.session_state['week_selection'])
 
+            if 'current_position' not in st.session_state:
+                st.session_state.current_position = 0
+            elif st.session_state.current_position > len(sentences_df):
+                st.session_state.current_position = 0
+
             if 'review_order' not in st.session_state:
+                st.session_state.review_order = random.sample(range(0, len(sentences_df)), len(sentences_df))
+            elif len(st.session_state.review_order) > len(sentences_df):
                 st.session_state.review_order = random.sample(range(0, len(sentences_df)), len(sentences_df))
 
             def previous_click():
