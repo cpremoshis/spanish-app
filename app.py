@@ -219,9 +219,10 @@ def main():
                 col_left.button("Previous", use_container_width=True, on_click=vocab_previous_click)
                 col_right.button("Next", use_container_width=True, on_click=vocab_next_click)
 
+                vocab_link_number = st.session_state.vocab_review_order[st.session_state.current_vocab_position]
+
                 #st.write(st.session_state.current_vocab_position)
                 #st.write(st.session_state.vocab_review_order)
-                vocab_link_number = st.session_state.vocab_review_order[st.session_state.current_vocab_position]
                 #st.write(vocab_link_number)
 
                 #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
