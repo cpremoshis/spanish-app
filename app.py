@@ -184,7 +184,7 @@ def main():
         )
     with column2:
         weeks_list = sentence_files.keys()
-        st.session_state['week_selection'] = st.selectbox("Select week:", weeks_list)
+        st.session_state['week_selection'] = st.selectbox("Select topic:", weeks_list)
 
     if tool_type == "Vocab review":
 
