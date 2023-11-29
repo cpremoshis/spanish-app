@@ -194,8 +194,12 @@ def main():
         try:
             if 'current_vocab_position' not in st.session_state:
                 st.session_state.current_vocab_position = 0
+            elif st.session_state.current_vocab_position > len(word_pairs):
+                st.session_state.current_vocab_position = 0
 
             if 'vocab_review_order' not in st.session_state:
+                st.session_state.vocab_review_order = random.sample(range(0, len(word_pairs)), len(word_pairs))
+            elif len(st.session_state.vocab_review_order) > len(word_pairs):
                 st.session_state.vocab_review_order = random.sample(range(0, len(word_pairs)), len(word_pairs))
 
             def vocab_previous_click():
