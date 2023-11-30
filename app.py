@@ -231,7 +231,7 @@ def main():
         def open_sentences(week):
             sentences_df = None
 
-            sentence_path = files_df[files_df['Topics'] == week]['Sentences']
+            sentence_path = files_df[files_df['Topics'] == week]['Sentences'].iloc[0]
 
             with open(sentence_path, 'r') as f:
                 sentences_df = pd.read_csv(f, index_col=0)
