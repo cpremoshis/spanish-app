@@ -239,7 +239,7 @@ def main():
             sentence_path = unicodedata.normalize('NFC', sentence_path)
 
             with open(sentence_path, 'r') as f:
-                sentences_df = pd.read_csv(f, index_col=0)
+                sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
         
             return sentences_df
         
