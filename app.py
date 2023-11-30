@@ -75,10 +75,10 @@ def open_topics_list():
     with open(chat_topics_file, 'r') as f:
         topics_df = pd.read_csv(f, names=col_names, encoding='utf-8')
 
-    def normalize_characters(text):
-        return unicodedata.normalize('NFC', text)
+    #def normalize_characters(text):
+    #    return unicodedata.normalize('NFC', text)
     
-    topics_df['Week'] = topics_df['Week'].apply(normalize_characters)
+    #topics_df['Week'] = topics_df['Week'].apply(normalize_characters)
 
     return topics_df
 
