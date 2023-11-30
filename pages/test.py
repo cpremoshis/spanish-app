@@ -29,7 +29,7 @@ topics_list, files_df = open_topics_list()
 
 
 sentence_path = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
-#sentence_path = unicodedata.normalize('NFC', sentence_path)
+sentence_path = unicodedata.normalize('NFC', sentence_path)
 
 with open(sentence_path, 'r') as f:
     test_df = pd.read_csv(f)
