@@ -25,20 +25,18 @@ topics_list, files_df = open_topics_list()
 #with col2:
 #    st.write("DataFrame path bytes:", [hex(ord(c)) for c in sentence_path])
 
-path = files_df[files_df['Topics'] == 'Economía']['Sentences'].iloc[0]
-normalized = unicodedata.normalize('NFC', path)
 
-test = os.path.isfile(normalized)
-st.write(test)
 
-files = os.listdir('/mount/src/spanish-app/Sentences/Economía/')
-st.write(files)
 
-hardcode = 'Economía.csv'
-econ = files[2]
+sentence_path = files_df[files_df['Topics'] == 'Economía']['Sentences'].iloc[0]
+sentence_path = unicodedata.normalize('NFC', sentence_path)
 
-col1, col2 = st.columns(2)
-with col1:
-    st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcode])
-with col2:
-    st.write("DataFrame path bytes:", [hex(ord(c)) for c in econ])
+# Debugging code
+print("Original Path:", sentence_path)
+normalized_path = unicodedata.normalize('NFC', sentence_path)
+print("Normalized Path:", normalized_path)
+print("Path Exists:", os.path.exists(normalized_path))
+
+
+with open(sentence_path, 'r') as f:
+    sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
