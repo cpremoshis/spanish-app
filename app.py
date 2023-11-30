@@ -404,8 +404,9 @@ def find_sentence_files():
 
         for file in folder_contents:
             if ".csv" in file:
-                final_file = file
-                sentence_files[file.strip('.csv')] = sentences_root_folder + "/" + item + "/" + final_file
+                raw_text = file
+                normalized_file_name = unicodedata.normalize('NFC', raw_text)
+                sentence_files[normalized_file_name.strip('.csv')] = sentences_root_folder + "/" + item + "/" + normalized_file_name
 
     return sentence_files
 
