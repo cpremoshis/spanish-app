@@ -342,7 +342,9 @@ def main():
                 st.session_state['user_input'] = text_box
                 st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
 
-                gpt_response = chat_with_gpt(topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'], "\n\n".join(st.session_state['conversation_history']))
+                topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics']
+
+                gpt_response = chat_with_gpt(topics, "\n\n".join(st.session_state['conversation_history']))
                 st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
 
                 # Update the history
