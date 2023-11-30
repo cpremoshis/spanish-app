@@ -28,15 +28,8 @@ topics_list, files_df = open_topics_list()
 
 
 
-sentence_path = files_df[files_df['Topics'] == 'Economía']['Sentences'].iloc[0]
+sentence_path = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 sentence_path = unicodedata.normalize('NFC', sentence_path)
-
-try:
-    with open(sentence_path, 'r') as f:
-        sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
-except Exception as e:
-    print("Error opening file:", e)
-    print("Tried to open file at path:", sentence_path)
 
 
 # Debugging code
