@@ -10,7 +10,7 @@ import re
 import pandas as pd
 import random
 from datetime import datetime
-import configparser
+#import configparser
 import unicodedata
 
 #Page configuration
@@ -21,10 +21,10 @@ st.set_page_config(
     )
 
 #API key
-#openai.api_key = st.secrets['openai']['api_key']
-config = configparser.ConfigParser()
-config.read('config.ini')
-openai.api_key = config['openai']['api_key']
+openai.api_key = st.secrets['openai']['api_key']
+#config = configparser.ConfigParser()
+#config.read('config.ini')
+#openai.api_key = config['openai']['api_key']
 
 @st.cache_data()
 def open_topics_list():
