@@ -352,6 +352,8 @@ def main():
 
             # Display the chat history outside the if block
             write_chat_history()
+            st.write(topics)
+            st.write()
         except Exception as error:
             st.write(error)
 
