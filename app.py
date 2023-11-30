@@ -342,7 +342,7 @@ def main():
                 st.session_state['user_input'] = text_box
                 st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
 
-                topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics']
+                topics = str(topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'])
 
                 gpt_response = chat_with_gpt(topics, "\n\n".join(st.session_state['conversation_history']))
                 st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
@@ -353,7 +353,6 @@ def main():
             # Display the chat history outside the if block
             write_chat_history()
             st.write(topics)
-            st.write()
         except Exception as error:
             st.write(error)
 
