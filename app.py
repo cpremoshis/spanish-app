@@ -38,8 +38,7 @@ def open_vocab_list(week):
 
         for row in vocab_reader:
             if row:
-                raw_text = row[0]
-                key = unicodedata.normalize('NFC', raw_text)
+                key = row[0]
                 value = row[1]
                 vocab_dict[key] = value
             else:
@@ -59,8 +58,7 @@ def open_sentence_list(week_selection):
 
         for row in sentence_reader:
             if row:
-                raw_text = row[0]
-                key = unicodedata.normalize('NFC', raw_text)
+                key = row[0]
                 value = row[1]
                 sentence_dict[key] = value
             else:
@@ -406,9 +404,8 @@ def find_sentence_files():
 
         for file in folder_contents:
             if ".csv" in file:
-                raw_text = file
-                normalized_file_name = unicodedata.normalize('NFC', raw_text)
-                sentence_files[normalized_file_name.strip('.csv')] = sentences_root_folder + "/" + item + "/" + normalized_file_name
+                final_file = file
+                sentence_files[file.strip('.csv')] = sentences_root_folder + "/" + item + "/" + final_file
 
     return sentence_files
 
