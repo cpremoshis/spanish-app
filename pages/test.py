@@ -25,7 +25,7 @@ topics_list, files_df = open_topics_list()
 #with col2:
 #    st.write("DataFrame path bytes:", [hex(ord(c)) for c in sentence_path])
 
-path = files_df[files_df['Topics'] == 'Economía']['Sentences'].iloc[0]
+path = files_df[files_df['Topics'] == 'Consular']['Sentences'].iloc[0]
 normalized = unicodedata.normalize('NFC', path)
 
 test = os.path.isfile(normalized)
