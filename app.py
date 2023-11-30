@@ -166,7 +166,7 @@ def main():
         ["Vocab review", "Sentences", "Conversation"],
         )
     with column2:
-        st.session_state['week_selection'] = st.selectbox("Select topic:", files_df['Topics'])
+        st.session_state['week_selection'] = st.selectbox("Select topic:", topics_list)
 
     if tool_type == "Vocab review":
         st.error("Consider adding audio function")
