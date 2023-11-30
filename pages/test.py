@@ -33,3 +33,12 @@ st.write(test)
 
 files = os.listdir('/mount/src/spanish-app/Sentences/')
 st.write(files)
+
+hardcode = 'Economía'
+econ = files[3]
+
+col1, col2 = st.columns(2)
+with col1:
+    st.write("Hardcoded path bytes:", [hex(ord(c)) for c in hardcode])
+with col2:
+    st.write("DataFrame path bytes:", [hex(ord(c)) for c in econ])
