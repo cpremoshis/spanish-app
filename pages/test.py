@@ -24,7 +24,7 @@ def open_sentences(week):
 
     return sentences_df
 
-sentences_df = open_sentences(st.session_state['week_selection'])
+sentences_df = open_sentences('Sentences')
 
 hardcode = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 df_path = files_df[files_df['Topics'] == 'Sentences']['Sentences'].iloc[0]
