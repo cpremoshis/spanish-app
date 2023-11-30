@@ -159,6 +159,9 @@ def main():
 
     topics_list, files_df = open_topics_list()
 
+    st.write(topics_list)
+    st.write(files_df)
+
     column1, column2 = st.columns(2)
 
     with column1:
