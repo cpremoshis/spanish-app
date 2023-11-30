@@ -236,7 +236,7 @@ def main():
             sentences_df = None
 
             sentence_path = files_df[files_df['Topics'] == week]['Sentences'].iloc[0]
-            sentence_path = unicodedata.normalize('NFC', sentence_path)
+            #sentence_path = unicodedata.normalize('NFC', sentence_path)
 
             with open(sentence_path, 'r') as f:
                 sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
