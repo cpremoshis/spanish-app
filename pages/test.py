@@ -13,10 +13,10 @@ def open_topics_list():
 
 topics_list, files_df = open_topics_list()
 
-def open_sentences(Economía):
+def open_sentences(topic):
     sentences_df = None
 
-    sentence_path = files_df[files_df['Topics'] == Economía]['Sentences'].iloc[0]
+    sentence_path = files_df[files_df['Topics'] == topic]['Sentences'].iloc[0]
     sentence_path = unicodedata.normalize('NFC', sentence_path)
 
     with open(sentence_path, 'r') as f:
