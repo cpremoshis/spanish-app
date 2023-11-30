@@ -31,7 +31,7 @@ normalized = unicodedata.normalize('NFC', path)
 test = os.path.isfile(normalized)
 st.write(test)
 
-files = os.listdir('/mount/src/spanish-app/Sentences/')
+files = os.listdir('/mount/src/spanish-app/Sentences/Economía/')
 st.write(files)
 
 hardcode = 'Economía'
