@@ -38,7 +38,8 @@ def open_vocab_list(week):
 
         for row in vocab_reader:
             if row:
-                key = row[0]
+                raw_text = row[0]
+                key = unicodedata.normalize('NFC', raw_text)
                 value = row[1]
                 vocab_dict[key] = value
             else:
