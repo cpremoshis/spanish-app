@@ -21,10 +21,19 @@ st.set_page_config(
     )
 
 #API key
-openai.api_key = st.secrets['openai']['api_key']
-#config = configparser.ConfigParser()
-#config.read('config.ini')
-#openai.api_key = config['openai']['api_key']
+#openai.api_key = st.secrets['openai']['api_key']
+config = configparser.ConfigParser()
+config.read('config.ini')
+openai.api_key = config['openai']['api_key']
+
+@st.cache_data()
+def open_topics_list():
+    with open('./Topics.csv', 'r') as f:
+        df = pd.read_csv(f, index_col=0)
+
+    topics_list = df['Topics'].tolist()
+
+    return topics_list, df
 
 @st.cache_data()
 def open_vocab_list(week):
@@ -32,42 +41,17 @@ def open_vocab_list(week):
     vocab_file_path = vocab_files[week]
 
     with open(vocab_file_path, 'r') as f:
-        vocab_reader = csv.reader(f)
+        df = pd.read_csv(f, index_col=0)
 
-        vocab_dict = {}
+    vocab_dict = {}
 
-        for row in vocab_reader:
-            if row:
-                key = row[0]
-                value = row[1]
-                vocab_dict[key] = value
-            else:
-                pass
+    for index, row in df.iterrows():
+        vocab_dict[row['Spanish']] = row['English']
 
     return vocab_dict
 
 @st.cache_data
-def open_sentence_list(week_selection):
-
-    sentence_file_path = sentence_files[week_selection]
-
-    with open(sentence_file_path, 'r') as f:
-        sentence_reader = csv.reader(f)
-
-        sentence_dict = {}
-
-        for row in sentence_reader:
-            if row:
-                key = row[0]
-                value = row[1]
-                sentence_dict[key] = value
-            else:
-                pass
-
-    return sentence_dict
-
-@st.cache_data
-def open_topics_list():
+def open_chat_topics_list():
 
     chat_topics_file = "./Chat Topics/Chat Topics.csv"
     col_names = ['Week', 'Topics']
@@ -139,7 +123,7 @@ def chat_with_gpt(topics, prompt):
     response = openai.chat.completions.create(
         model='gpt-3.5-turbo-1106',
         messages=[{'role':'user', 'content':prompt},
-                  {'role':'system', 'content':f"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time in random order, but allow for mild deviation: {topics}."}],
+                  {'role':'system', 'content':f"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time but allow for mild deviation: {topics}."}],
         max_tokens=150,
         temperature=0.8
     )
@@ -173,8 +157,7 @@ def main():
     if "week_selection" not in st.session_state:
         st.session_state['week_selection'] = "Week 9"
 
-    #Creates list of only Spanish phrases from the vocab dict
-    #spanish_vocab = [re.sub(re_pattern, '', word).strip() for word in word_pairs.keys()]
+    topics_list, files_df = open_topics_list()
 
     column1, column2 = st.columns(2)
 
@@ -183,11 +166,11 @@ def main():
         ["Vocab review", "Sentences", "Conversation"],
         )
     with column2:
-        weeks_list = sentence_files.keys()
-        st.session_state['week_selection'] = st.selectbox("Select topic:", weeks_list)
+        st.session_state['week_selection'] = st.selectbox("Select topic:", topics_list)
 
     if tool_type == "Vocab review":
-
+        st.error("Consider adding audio function")
+        
         # Dictionary of Spanish-English word pairs
         word_pairs = open_vocab_list(st.session_state['week_selection'])
 
@@ -218,9 +201,10 @@ def main():
                 col_left, col_right = st.columns(2)
                 col_left.button("Previous", use_container_width=True, on_click=vocab_previous_click)
                 col_right.button("Next", use_container_width=True, on_click=vocab_next_click)
-
+                
                 vocab_link_number = st.session_state.vocab_review_order[st.session_state.current_vocab_position]
-
+                
+                #st.write(len(word_pairs))
                 #st.write(st.session_state.current_vocab_position)
                 #st.write(st.session_state.vocab_review_order)
                 #st.write(vocab_link_number)
@@ -246,12 +230,12 @@ def main():
         @st.cache_data
         def open_sentences(week):
             sentences_df = None
-            check_for_sentences = os.path.isfile(sentence_files[str(week)])
 
-            if check_for_sentences == True:
-                with open(sentence_files[week], 'r') as f:
-                    sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
-            
+            sentence_path = './Sentences/' + week + "/" + week + ".csv"
+
+            with open(sentence_path, 'r') as f:
+                sentences_df = pd.read_csv(f, index_col=0)
+        
             return sentences_df
         
         try:
@@ -289,12 +273,9 @@ def main():
                 link_number = st.session_state.review_order[st.session_state.current_position]
                 #st.write(link_number)
 
-                if st.session_state['week_selection'] != 'Economía':
-                    audio_path = sentences_df.iloc[link_number]['Audio']
-                    normalized_audio_path = unicodedata.normalize('NFC', audio_path)
-                    st.audio(normalized_audio_path)
-                else:
-                    pass
+                audio_path = sentences_df.iloc[link_number]['Audio']
+                normalized_audio_path = unicodedata.normalize('NFC', audio_path)
+                st.audio(normalized_audio_path)
 
                 st.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                 #st.write(sentences_df.iloc[link_number]['Spanish'])
@@ -326,9 +307,8 @@ def main():
         text_box = st.text_area('Type here:', "Hablemos de un tema de su elección.")
         submit_button = st.button("Submit")
 
-        topics_df = open_topics_list()
-
         try:
+            chat_topics_df = open_chat_topics_list()
             
             if 'history' not in st.session_state:
                 st.session_state['history'] = ""
@@ -336,7 +316,7 @@ def main():
             if 'conversation_history' not in st.session_state:
                 st.session_state['conversation_history'] = []
 
-            topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
+            topics = chat_topics_df[chat_topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
             topics = str(topics)
             st.write(topics)
 
@@ -376,21 +356,6 @@ def find_vocab_files():
 
 vocab_files = find_vocab_files()
 
-
-#vocab_files = {
-#    "Week 9": "./Vocab/Week 9.csv",
-#    "Week 10": "./Vocab/Week 10.csv",
-#    "Week 11": "./Vocab/Week 11.csv",
-#    "Administración y Gerencia": "./Vocab/Administración y Gerencia.csv",
-#    "Consular": "./Vocab/Consular.csv",
-#    "Diplomacia Pública": "./Vocab/Diplomacia Pública.csv",
-#    "Economía": "./Vocab/Economía.csv",
-#    "Política": "./Vocab/Política.csv",
-#    "Seguridad": "./Vocab/Seguridad.csv",
-#    "USAID": "./Vocab/USAID.csv",
-#    "Vocabulario General": "./Vocab/Vocabulario General.csv"
-#    }
-
 @st.cache_data()
 def find_sentence_files():
     sentences_root_folder = "./Sentences"
@@ -409,22 +374,6 @@ def find_sentence_files():
     return sentence_files
 
 sentence_files = find_sentence_files()
-
-#sentence_files = {
-#    "Week 9": "./Sentences/Week 9/Week 9.csv",
-#    "Week 10": "./Sentences/Week 10/Week 10.csv",
-#    "Week 11": "./Sentences/Week 11/Week 11.csv",
-#    "Administración y Gerencia": "./Sentences/Administración y Gerencia/Administración y Gerencia.csv",
-#    "Consular": "./Sentences/Consular/Consular.csv",
-#    "Diplomacia Pública": "./Sentences/Diplomacia Pública/iplomacia Pública.csv",
-#    "Economía": "./Sentences/Economía/Economía.csv",
-#    "Política": "./Sentences/Política/Política.csv",
-#    "Seguridad": "./Sentences/Seguridad/Seguridad.csv",
-#    "USAID": "./Sentences/USAID/USAID.csv",
-#    "Vocabulario General": "./Sentences/Vocabulario General/Vocabulario General.csv"
-#}
-
-
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
