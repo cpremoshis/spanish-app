@@ -337,6 +337,9 @@ def main():
             if 'conversation_history' not in st.session_state:
                 st.session_state['conversation_history'] = []
 
+            st.write(topics)
+
+
             if submit_button:
                 # Store user input in the session state immediately after the button is pressed
                 st.session_state['user_input'] = text_box
@@ -353,7 +356,6 @@ def main():
 
             # Display the chat history outside the if block
             write_chat_history()
-            st.write(topics)
         except Exception as error:
             st.write(error)
 
