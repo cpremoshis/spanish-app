@@ -31,13 +31,7 @@ topics_list, files_df = open_topics_list()
 sentence_path = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 #sentence_path = unicodedata.normalize('NFC', sentence_path)
 
-
-# Debugging code
-print("Original Path:", sentence_path)
-normalized_path = unicodedata.normalize('NFC', sentence_path)
-print("Normalized Path:", normalized_path)
-print("Path Exists:", os.path.exists(normalized_path))
-
-
 with open(sentence_path, 'r') as f:
-    sentences_df = pd.read_csv(f, index_col=0, encoding='utf-8')
+    test_df = pd.read_csv(f)
+
+st.write(test_df)
