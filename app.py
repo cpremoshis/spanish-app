@@ -29,7 +29,7 @@ openai.api_key = st.secrets['openai']['api_key']
 @st.cache_data()
 def open_topics_list():
     with open('./Topics.csv', 'r') as f:
-        files_df = pd.read_csv(f, index_col=0)
+        files_df = pd.read_csv(f, index_col=0, encoding='utf-8')
 
     topics_list = files_df['Topics'].tolist()
 
