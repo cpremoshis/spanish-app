@@ -4,7 +4,7 @@ import pandas as pd
 import unicodedata
 
 def open_topics_list():
-    with open('./Topics.csv', 'r') as f:
+    with open('/mount/src/spanish-app/Topics.csv', 'r') as f:
         files_df = pd.read_csv(f, index_col=0, encoding='utf-8')
 
     topics_list = files_df['Topics'].tolist()
@@ -26,7 +26,7 @@ def open_sentences(week):
 
 sentences_df = open_sentences(st.session_state['week_selection'])
 
-hardcode = './Sentences/Economía/Economía.csv'
+hardcode = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 df_path = files_df[files_df['Topics'] == 'Sentences']['Sentences'].iloc[0]
 
 col1, col2 = st.columns(2)
