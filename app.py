@@ -36,7 +36,7 @@ def open_topics_list():
     return topics_list, files_df
 
 @st.cache_data()
-def open_vocab_list(week):
+def open_vocab_list(week, files_df):
 
     vocab_file_path = files_df[week]
 
