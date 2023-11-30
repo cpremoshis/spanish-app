@@ -13,10 +13,10 @@ def open_topics_list():
 
 topics_list, files_df = open_topics_list()
 
-def open_sentences(week):
+def open_sentences(Economía):
     sentences_df = None
 
-    sentence_path = files_df[files_df['Topics'] == week]['Sentences'].iloc[0]
+    sentence_path = files_df[files_df['Topics'] == Economía]['Sentences'].iloc[0]
     sentence_path = unicodedata.normalize('NFC', sentence_path)
 
     with open(sentence_path, 'r') as f:
@@ -24,9 +24,9 @@ def open_sentences(week):
 
     return sentences_df
 
-sentences_df = open_sentences('Economía')
+sentences_df = open_sentences('Economía')
 
-hardcode = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
+hardcode = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 df_path = files_df[files_df['Topics'] == 'Sentences']['Sentences'].iloc[0]
 
 col1, col2 = st.columns(2)
