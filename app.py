@@ -330,23 +330,20 @@ def main():
 
         try:
             
-            
             if 'history' not in st.session_state:
                 st.session_state['history'] = ""
 
             if 'conversation_history' not in st.session_state:
                 st.session_state['conversation_history'] = []
 
+            topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
+            topics = str(topics)
             st.write(topics)
-
 
             if submit_button:
                 # Store user input in the session state immediately after the button is pressed
                 st.session_state['user_input'] = text_box
                 st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
-
-                topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
-                topics = str(topics)
 
                 gpt_response = chat_with_gpt(topics, "\n\n".join(st.session_state['conversation_history']))
                 st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
