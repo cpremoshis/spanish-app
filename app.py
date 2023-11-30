@@ -59,7 +59,8 @@ def open_sentence_list(week_selection):
 
         for row in sentence_reader:
             if row:
-                key = row[0]
+                raw_text = row[0]
+                key = unicodedata.normalize('NFC', raw_text)
                 value = row[1]
                 sentence_dict[key] = value
             else:
