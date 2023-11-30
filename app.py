@@ -39,6 +39,7 @@ def open_topics_list():
 def open_vocab_list(week, files_df):
 
     vocab_file_path = files_df[files_df['Topics'] == week]['Vocab'].iloc[0]
+    vocab_file_path = unicodedata.normalize('NFC', vocab_file_path)
 
     with open(vocab_file_path, 'r') as f:
         df = pd.read_csv(f, index_col=0, encoding='utf-8')
