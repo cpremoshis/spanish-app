@@ -38,7 +38,7 @@ def open_topics_list():
 @st.cache_data()
 def open_vocab_list(week, files_df):
 
-    vocab_file_path = files_df[week]
+    vocab_file_path = files_df[files_df['Topics'] == week]['Vocab'].iloc[0]
 
     with open(vocab_file_path, 'r') as f:
         df = pd.read_csv(f, index_col=0, encoding='utf-8')
