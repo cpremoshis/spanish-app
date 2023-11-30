@@ -342,8 +342,8 @@ def main():
                 st.session_state['user_input'] = text_box
                 st.session_state['conversation_history'].append(f"User: {st.session_state['user_input']}")
 
-                topics = str(topics_df.loc[st.session_state['week_selection'], 'Topics'])
-                #topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics']
+                topics = topics_df[topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
+                topics = str(topics)
 
                 gpt_response = chat_with_gpt(topics, "\n\n".join(st.session_state['conversation_history']))
                 st.session_state['conversation_history'].append(f"GPT: {gpt_response}")
