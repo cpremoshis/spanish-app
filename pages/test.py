@@ -34,8 +34,8 @@ st.write(test)
 files = os.listdir('/mount/src/spanish-app/Sentences/Economía/')
 st.write(files)
 
-hardcode = 'Economía'
-econ = files[3]
+hardcode = 'Economía.csv'
+econ = files[2]
 
 col1, col2 = st.columns(2)
 with col1:
