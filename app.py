@@ -29,16 +29,16 @@ openai.api_key = st.secrets['openai']['api_key']
 @st.cache_data()
 def open_topics_list():
     with open('./Topics.csv', 'r') as f:
-        df = pd.read_csv(f, index_col=0)
+        files_df = pd.read_csv(f, index_col=0)
 
-    topics_list = df['Topics'].tolist()
+    topics_list = files_df['Topics'].tolist()
 
-    return topics_list, df
+    return topics_list, files_df
 
 @st.cache_data()
 def open_vocab_list(week):
 
-    vocab_file_path = vocab_files[week]
+    vocab_file_path = files_df[week]
 
     with open(vocab_file_path, 'r') as f:
         df = pd.read_csv(f, index_col=0, encoding='utf-8')
@@ -339,22 +339,6 @@ def main():
 #Dictionaries of vocab and sentence files
 #Update each time new week is added
 #root_file_path = "/Users/casey/Documents/PythonProjects/Spanish Learning App/"
-
-#Show files in specified directory
-@st.cache_data()
-def find_vocab_files():
-    vocab_dir_list = os.listdir("./Vocab")
-    vocab_dir_list.remove(".DS_Store")
-    vocab_files = {}
-
-    for item in vocab_dir_list:
-        key = item.replace('.csv', '')
-        value = "./Vocab/" + key + ".csv"
-        vocab_files[key] = value
-
-    return vocab_files
-
-vocab_files = find_vocab_files()
 
 #Sets default 'word_index'
 if 'word_index' not in st.session_state:
