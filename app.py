@@ -41,7 +41,7 @@ def open_vocab_list(week):
     vocab_file_path = vocab_files[week]
 
     with open(vocab_file_path, 'r') as f:
-        df = pd.read_csv(f, index_col=0)
+        df = pd.read_csv(f, index_col=0, encoding='utf-8')
 
     vocab_dict = {}
 
