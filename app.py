@@ -172,7 +172,7 @@ def main():
         st.error("Consider adding audio function")
         
         # Dictionary of Spanish-English word pairs
-        word_pairs = open_vocab_list(st.session_state['week_selection'])
+        word_pairs = open_vocab_list(st.session_state['week_selection'], files_df)
 
         try:
             if 'current_vocab_position' not in st.session_state:
