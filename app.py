@@ -154,8 +154,8 @@ def main():
     st.title("Adelante y Más Allá")
 
     #Adds default 'week_selection' to session state
-    #if "week_selection" not in st.session_state:
-    #    st.session_state['week_selection'] = "Week 9"
+    if "week_selection" not in st.session_state:
+        st.session_state['week_selection'] = "Week 9"
 
     topics_list, files_df = open_topics_list()
 
@@ -166,7 +166,7 @@ def main():
         ["Vocab review", "Sentences", "Conversation"],
         )
     with column2:
-        st.session_state['week_selection'] = st.selectbox("Select topic:", topics_list)
+        st.session_state['week_selection'] = st.selectbox("Select topic:", files_df['Topics'])
 
     if tool_type == "Vocab review":
         st.error("Consider adding audio function")
