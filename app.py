@@ -154,8 +154,8 @@ def main():
     st.title("Adelante y Más Allá")
 
     #Adds default 'week_selection' to session state
-    if "week_selection" not in st.session_state:
-        st.session_state['week_selection'] = "Week 9"
+    #if "week_selection" not in st.session_state:
+    #    st.session_state['week_selection'] = "Week 9"
 
     topics_list, files_df = open_topics_list()
 
