@@ -16,7 +16,7 @@ topics_list, files_df = open_topics_list()
 def open_sentences(week):
     sentences_df = None
 
-    sentence_path = files_df[files_df['Topics'] == week]['Sentences']
+    sentence_path = files_df[files_df['Topics'] == week]['Sentences'].iloc[0]
     sentence_path = unicodedata.normalize('NFC', sentence_path)
 
     with open(sentence_path, 'r') as f:
