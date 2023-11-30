@@ -139,7 +139,7 @@ def chat_with_gpt(topics, prompt):
     response = openai.chat.completions.create(
         model='gpt-3.5-turbo-1106',
         messages=[{'role':'user', 'content':prompt},
-                  {'role':'system', 'content':f"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time but allow for mild deviation: {topics}."}],
+                  {'role':'system', 'content':f"You are a teacher having a discussion with your student. Only speak in Spanish. Ensure your responses are always 150 tokens or less. Offer your students a mix of questions and opinions, do not just ask questions. Do not restart the conversation from the beginning. Focus on these topics one at a time in random order, but allow for mild deviation: {topics}."}],
         max_tokens=150,
         temperature=0.8
     )
