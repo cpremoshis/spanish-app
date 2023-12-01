@@ -303,6 +303,10 @@ def main():
 
     if tool_type == "Conversation":
 
+        incomplete_topics = ['Common Verbs 1 - 100', 'Common Verbs 101 - 200', 'Common Verbs 201 - 300', 'Common Verbs 301 - 400', 'Common Verbs 401 - 503']
+        if st.session_state['week_selection'] in incomplete_topics:
+            st.error("Chat with GPT has not yet been configured to work with the 'Common Verbs' topic that you've selected. Please make another selection.")
+        
         st.subheader("Chat with GPT", divider='orange')
         st.write("Begin by hitting 'Submit' for the pre-written message.")
 
