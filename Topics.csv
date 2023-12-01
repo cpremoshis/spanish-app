@@ -10,3 +10,8 @@
 8,USAID,./Vocab/USAID.csv,./Sentences/USAID/USAID.csv,./Chat Topics/Chat Topics.csv
 9,Administración y Gerencia,./Vocab/Administración y Gerencia.csv,./Sentences/Administración y Gerencia/Administración y Gerencia.csv,./Chat Topics/Chat Topics.csv
 10,Vocabulario General,./Vocab/Vocabulario General.csv,./Sentences/Vocabulario General/Vocabulario General.csv,./Chat Topics/Chat Topics.csv
+11,Common Verbs 1 - 100,./Vocab/Common Verbs 1 - 100.csv,./Sentences/Common Verbs 1 - 100/Common Verbs 1 - 100.csv,./Chat Topics/Chat Topics.csv
+12,Common Verbs 101 - 200,./Vocab/Common Verbs 101 - 200.csv,./Sentences/Common Verbs 101 - 200/Common Verbs 101 - 200.csv,./Chat Topics/Chat Topics.csv
+13,Common Verbs 201 - 300,./Vocab/Common Verbs 201 - 300.csv,./Sentences/Common Verbs 201 - 300/Common Verbs 201 - 300.csv,./Chat Topics/Chat Topics.csv
+14,Common Verbs 301 - 400,./Vocab/Common Verbs 301 - 400.csv,./Sentences/Common Verbs 301 - 400/Common Verbs 301 - 400.csv,./Chat Topics/Chat Topics.csv
+15,Common Verbs 400 - 503,./Vocab/Common Verbs 400 - 503.csv,./Sentences/Common Verbs 400 - 503/Common Verbs 400 - 503.csv,./Chat Topics/Chat Topics.csv
