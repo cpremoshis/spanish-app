@@ -160,9 +160,6 @@ def main():
 
     topics_list, files_df = open_topics_list()
 
-    st.write(topics_list)
-    st.write(files_df)
-
     column1, column2 = st.columns(2)
 
     with column1:
@@ -322,8 +319,6 @@ def main():
                 st.session_state['conversation_history'] = []
 
             topics = chat_topics_df[chat_topics_df['Week'] == st.session_state['week_selection']]['Topics'].iloc[0]
-            topics = str(topics)
-            st.write(topics)
 
             if submit_button:
                 # Store user input in the session state immediately after the button is pressed
