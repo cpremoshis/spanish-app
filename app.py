@@ -235,10 +235,10 @@ def main():
         def open_sentences(week):
             sentences_df = None
 
-            if week == 'Economía':
-                week = 'Economia'
-            if week == 'Diplomacia Pública':
-                week = 'Diplomacia Publica'
+            #if week == 'Economía':
+            #    week = 'Economia'
+            #if week == 'Diplomacia Pública':
+            #    week = 'Diplomacia Publica'
 
             sentence_path = files_df[files_df['Topics'] == week]['Sentences'].iloc[0]
             sentence_path = unicodedata.normalize('NFC', sentence_path)
