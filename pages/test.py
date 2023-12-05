@@ -13,10 +13,10 @@ def open_topics_list():
 
 topics_list, files_df = open_topics_list()
 
-sentence_path = files_df[files_df['Topics'] == 'Economía']['Sentences'].iloc[0]
+sentence_path = files_df[files_df['Topics'] == 'Economia']['Sentences'].iloc[0]
 sentence_path = unicodedata.normalize('NFC', sentence_path)
 
-hardcode = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
+hardcode = '/mount/src/spanish-app/Sentences/Economia/Economia.csv'
 df_path = files_df[files_df['Topics'] == 'Sentences']['Sentences'].iloc[0]
 
 col1, col2 = st.columns(2)
