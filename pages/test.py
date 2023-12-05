@@ -25,9 +25,6 @@ with col1:
 with col2:
     st.write("DataFrame path bytes:", [hex(ord(c)) for c in sentence_path])
 
-
-
-
 #sentence_path = '/mount/src/spanish-app/Sentences/Economía/Economía.csv'
 #sentence_path = unicodedata.normalize('NFC', sentence_path)
 
