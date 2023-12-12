@@ -3,6 +3,12 @@ import os
 import pandas as pd
 import unicodedata
 
+#Page configuration
+st.set_page_config(
+    page_title="Debug",
+    page_icon="🇪🇸"
+    )
+
 def open_topics_list():
     with open('/mount/src/spanish-app/Topics.csv', 'r') as f:
         files_df = pd.read_csv(f, index_col=0, encoding='utf-8')

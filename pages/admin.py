@@ -14,6 +14,7 @@ from google.cloud import texttospeech
 #Page configuration
 st.set_page_config(
     page_title="Admin",
+    page_icon="🇪🇸"
     )
 
 try:
