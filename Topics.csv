@@ -1,6 +1,6 @@
 ,Topics,Vocab,Sentences,Chat Topics
-0,Inmigración,./Vocab/Inmigracion.csv,./Sentences/Inmigracion/Inmigracion.csv,./Chat Topics/Chat Topics.csv
-1,Narcotráfico,./Vocab/Narcotrafico.csv,./Sentences/Narcotrafico/Narcotrafico.csv,./Chat Topics/Chat Topics.csv
+0,Inmigración,./Vocab/Inmigracion.csv,./Sentences/Inmigracion/Inmigracion.csv,./Chat Topics/Chat Topics.csv
+1,Narcotráfico,./Vocab/Narcotrafico.csv,./Sentences/Narcotrafico/Narcotrafico.csv,./Chat Topics/Chat Topics.csv
 2,Consular,./Vocab/Consular.csv,./Sentences/Consular/Consular.csv,./Chat Topics/Chat Topics.csv
 3,Diplomacia Pública,./Vocab/Diplomacia Pública.csv,./Sentences/Diplomacia Publica/Diplomacia Publica.csv,./Chat Topics/Chat Topics.csv
 4,Economía,./Vocab/Economía.csv,./Sentences/Economia/Economia.csv,./Chat Topics/Chat Topics.csv
