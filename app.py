@@ -158,6 +158,15 @@ def main():
     if "week_selection" not in st.session_state:
         st.session_state['week_selection'] = "Week 9"
 
+    if 'spanish_display_status' not in st.session_state:
+        st.session_state['spanish_display_status'] = True
+
+    def toggle_spanish_display():
+        if st.session_state['spanish_display_status'] == True:
+            st.session_state['spanish_display_status'] = False
+        else:
+            st.session_state['spanish_display_status'] = True
+
     topics_list, files_df = open_topics_list()
 
     column1, column2 = st.columns(2)
@@ -211,11 +220,11 @@ def main():
                 #st.write(vocab_link_number)
                 #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
 
+                st.button("Show/hide Spanish", key='vocab toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+
                 vocab_display = st.container()
 
-                spanish_toggle_vocab = st.toggle("Display Spanish", value=True)
-
-                if spanish_toggle_vocab == True:
+                if st.session_state['spanish_display_status'] == True:
                     vocab_display.subheader("🇪🇸 " + list(word_pairs)[vocab_link_number], divider='orange')
                     vocab_display.text("  \n")
                     vocab_display.subheader("🇺🇸 " + list(word_pairs.values())[vocab_link_number], divider='orange')
@@ -285,6 +294,8 @@ def main():
                 normalized_audio_path = unicodedata.normalize('NFC', audio_path)
                 st.audio(normalized_audio_path)
 
+                st.button("Show/hide Spanish", key='sentences toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+
                 sentence_display = st.container()
 
                 def submit_report():
@@ -298,9 +309,8 @@ def main():
                 st.write("  \n")
 
                 with col_left2:
-                    spanish_toggle_sentences = st.toggle("Display Spanish", value=True)
 
-                    if spanish_toggle_sentences == True:
+                    if st.session_state['spanish_display_status'] == True:
                         sentence_display.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                         sentence_display.text("  \n")
                         sentence_display.subheader("🇺🇸 " + sentences_df.iloc[link_number]['English'], divider='orange')
