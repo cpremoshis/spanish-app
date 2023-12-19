@@ -21,7 +21,7 @@ st.set_page_config(
     )
 
 #API key
-openai.api_key = st.secrets['openai']['api_key']
+#openai.api_key = st.secrets['openai']['api_key']
 #config = configparser.ConfigParser()
 #config.read('config.ini')
 #openai.api_key = config['openai']['api_key']
@@ -161,11 +161,20 @@ def main():
     if 'spanish_display_status' not in st.session_state:
         st.session_state['spanish_display_status'] = True
 
+    if 'english_display_status' not in st.session_state:
+        st.session_state['english_display_status'] = True
+
     def toggle_spanish_display():
         if st.session_state['spanish_display_status'] == True:
             st.session_state['spanish_display_status'] = False
         else:
             st.session_state['spanish_display_status'] = True
+
+    def toggle_english_display():
+        if st.session_state['english_display_status'] == True:
+            st.session_state['english_display_status'] = False
+        else:
+            st.session_state['english_display_status'] = True
 
     topics_list, files_df = open_topics_list()
 
@@ -220,15 +229,16 @@ def main():
                 #st.write(vocab_link_number)
                 #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
 
-                st.button("Show/hide Spanish", key='vocab toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                vocab_display_left, vocab_display_right = st.columns(2)
+                vocab_display_left.button("Show/hide Spanish", key='spanish vocab toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                vocab_display_right.button("Show/hide English", key='english vocab toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
 
                 vocab_display = st.container()
 
                 if st.session_state['spanish_display_status'] == True:
                     vocab_display.subheader("🇪🇸 " + list(word_pairs)[vocab_link_number], divider='orange')
                     vocab_display.text("  \n")
-                    vocab_display.subheader("🇺🇸 " + list(word_pairs.values())[vocab_link_number], divider='orange')
-                else:
+                if st.session_state['english_display_status'] == True:
                     vocab_display.subheader("🇺🇸 " + list(word_pairs.values())[vocab_link_number], divider='orange')
 
             #Print debugging information
@@ -294,7 +304,9 @@ def main():
                 normalized_audio_path = unicodedata.normalize('NFC', audio_path)
                 st.audio(normalized_audio_path)
 
-                st.button("Show/hide Spanish", key='sentences toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                sentence_display_left, sentence_display_right = st.columns(2)
+                sentence_display_left.button("Show/hide Spanish", key='spanish sentences toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                sentence_display_right.button("Show/hide English", key='english sentences toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
 
                 sentence_display = st.container()
 
@@ -313,9 +325,9 @@ def main():
                     if st.session_state['spanish_display_status'] == True:
                         sentence_display.subheader("🇪🇸 " + sentences_df.iloc[link_number]['Spanish'], divider='orange')
                         sentence_display.text("  \n")
+                    if st.session_state['english_display_status'] == True:
                         sentence_display.subheader("🇺🇸 " + sentences_df.iloc[link_number]['English'], divider='orange')
-                    else:
-                        sentence_display.subheader("🇺🇸 " + sentences_df.iloc[link_number]['English'], divider='orange')
+                 
                     col_left2.write("  \n  ")
                     col_left2.write("  \n  ")
                     col_left2.write("  \n  ")
