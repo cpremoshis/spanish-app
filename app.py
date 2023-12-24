@@ -230,8 +230,8 @@ def main():
                 #st.audio(sentences_df.iloc[vocab_link_number]['Audio'])
 
                 vocab_display_left, vocab_display_right = st.columns(2)
-                vocab_display_left.button("Show/hide English", key='english vocab toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
-                vocab_display_right.button("Show/hide Spanish", key='spanish vocab toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                vocab_display_left.button("Show/hide English 🇺🇸", key='english vocab toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
+                vocab_display_right.button("Show/hide Spanish 🇪🇸", key='spanish vocab toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
 
                 vocab_display = st.container()
 
