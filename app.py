@@ -305,8 +305,8 @@ def main():
                 st.audio(normalized_audio_path)
 
                 sentence_display_left, sentence_display_right = st.columns(2)
-                sentence_display_left.button("Show/hide English", key='english sentences toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
-                sentence_display_right.button("Show/hide Spanish", key='spanish sentences toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
+                sentence_display_left.button("Toggle English 🇺🇸", key='english sentences toggle', type="primary", use_container_width=True, on_click=toggle_english_display)
+                sentence_display_right.button("Toggle Spanish 🇪🇸", key='spanish sentences toggle', type="primary", use_container_width=True, on_click=toggle_spanish_display)
 
                 sentence_display = st.container()
 
